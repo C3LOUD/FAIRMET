@@ -1,15 +1,29 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { CSSReset, ChakraProvider, extendTheme } from "@chakra-ui/react";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { RouterProvider } from "react-router-dom";
+import Fonts from "./Fonts";
+import { router } from "./Routes";
+import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
+
+const theme = extendTheme({
+  fonts: {
+    heading: `"Baskerville Old Face", "Yu Gothic UI", serif`,
+    body: `"Gill Sans MT", "Yu Gothic UI", san-serif`,
+  },
+});
+
 root.render(
   <React.StrictMode>
-    <App />
+    <ChakraProvider theme={theme}>
+      <CSSReset />
+      <Fonts />
+      <RouterProvider router={router} />
+    </ChakraProvider>
   </React.StrictMode>
 );
 
