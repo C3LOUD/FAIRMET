@@ -12,24 +12,25 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { SiInstagram, SiPixiv } from "react-icons/si";
+import { Link } from "react-router-dom";
+import { FaChevronDown } from "react-icons/fa6";
 
-type Props = {};
-
-const SideBar = (props: Props) => {
+const SideBar = () => {
   return (
     <Flex as="nav" direction="column" position="sticky" top="0" left="0">
-      <Box h="5rem">
+      <Link to="/">
         <Image
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Hololive_Production_logo.svg/512px-Hololive_Production_logo.svg.png"
           alt="logo"
         />
-      </Box>
+      </Link>
       <Accordion defaultIndex={[0]} allowMultiple>
-        <AccordionItem>
-          <AccordionButton>
+        <AccordionItem border="none">
+          <AccordionButton p="0">
             <Box as="span" flex="1" textAlign="left">
               HOME
             </Box>
+            <FaChevronDown />
           </AccordionButton>
 
           <AccordionPanel pb={4}>
@@ -39,19 +40,14 @@ const SideBar = (props: Props) => {
           </AccordionPanel>
         </AccordionItem>
 
-        <AccordionItem>
-          <AccordionButton>
-            <Box as="span" flex="1" textAlign="left">
-              {"DICTIONARY \uFF08Reference Search\uFF09"}
-            </Box>
-          </AccordionButton>
-        </AccordionItem>
+        <Link to="/dictionary">{"DICTIONARY\uFF08Reference Search\uFF09"}</Link>
 
-        <AccordionItem>
-          <AccordionButton>
+        <AccordionItem border="none">
+          <AccordionButton p="0">
             <Box as="span" flex="1" textAlign="left">
               {"BOOK \u3010ALL\u3011"}
             </Box>
+            <FaChevronDown />
           </AccordionButton>
           <AccordionPanel pb={4}>
             <Button variant="link">{"Buy \uFF06 Pick \u3010ITEM\u3011"}</Button>

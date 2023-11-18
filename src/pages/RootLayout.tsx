@@ -7,8 +7,8 @@ import { RiCopyrightLine } from "react-icons/ri";
 const RootLayout = () => {
   return (
     <Container as="main" maxW="90rem" px="0">
-      <Flex>
-        <Box w="13.75rem">
+      <Flex gap="5rem">
+        <Box maxW="13.75rem">
           <SideBar />
         </Box>
         <Flex flexDirection="column" px="0" w="100%">
