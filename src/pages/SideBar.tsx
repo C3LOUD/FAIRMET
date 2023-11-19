@@ -4,16 +4,16 @@ import {
   AccordionItem,
   AccordionPanel,
   Box,
-  Button,
   Flex,
   HStack,
   Image,
   Spacer,
   Text,
+  VStack,
 } from "@chakra-ui/react";
+import { FaChevronDown } from "react-icons/fa6";
 import { SiInstagram, SiPixiv } from "react-icons/si";
 import { Link } from "react-router-dom";
-import { FaChevronDown } from "react-icons/fa6";
 
 const SideBar = () => {
   return (
@@ -34,9 +34,17 @@ const SideBar = () => {
           </AccordionButton>
 
           <AccordionPanel pb={4}>
-            <Button variant="link">{"Highlight \uFF06 Updated"}</Button>
-            <Button variant="link">Reference Search</Button>
-            <Button variant="link">Book</Button>
+            <VStack>
+              <Box textAlign="left" w="100%">
+                <Link to="/#">{"Highlight \uFF06 Updated"}</Link>
+              </Box>
+              <Box textAlign="left" w="100%">
+                <Link to="/#">{"Reference Search"}</Link>
+              </Box>
+              <Box textAlign="left" w="100%">
+                <Link to="/#">{"Book"}</Link>
+              </Box>
+            </VStack>
           </AccordionPanel>
         </AccordionItem>
 
@@ -50,16 +58,22 @@ const SideBar = () => {
             <FaChevronDown />
           </AccordionButton>
           <AccordionPanel pb={4}>
-            <Button variant="link">{"Buy \uFF06 Pick \u3010ITEM\u3011"}</Button>
-            <Button variant="link">
-              {"Dress \uFF06 Wear \u3010OUTFIT\u3011"}
-            </Button>
-            <Button variant="link">
-              {"Style \uFF06 Air \u3010GROOMING \uFF06 BEAUTY \u3011"}
-            </Button>
-            <Button variant="link">
-              {"Other \u3010FASHION \uFF06 LIFESTYLE\u3011"}
-            </Button>
+            <Box textAlign="left" w="100%">
+              <Link to="/book">{"Buy \uFF06 Pick \u3010ITEM\u3011"}</Link>
+            </Box>
+            <Box textAlign="left" w="100%">
+              <Link to="/book">{"Dress \uFF06 Wear \u3010OUTFIT\u3011"}</Link>
+            </Box>
+            <Box textAlign="left" w="100%">
+              <Link to="/book">
+                {"Style \uFF06 Air \u3010GROOMING \uFF06 BEAUTY \u3011"}
+              </Link>
+            </Box>
+            <Box textAlign="left" w="100%">
+              <Link to="/book">
+                {"Other \u3010FASHION \uFF06 LIFESTYLE\u3011"}
+              </Link>
+            </Box>
           </AccordionPanel>
         </AccordionItem>
       </Accordion>

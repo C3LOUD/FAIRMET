@@ -10,6 +10,7 @@ import {
   GridItem,
   HStack,
   Heading,
+  Select,
   Spacer,
   Tag,
   Text,
@@ -20,6 +21,8 @@ import React, { useEffect, useState } from "react";
 import { FaChevronDown } from "react-icons/fa6";
 import DictionaryCard from "./DictionaryCard";
 import DictionaryModal from "./DictionaryModal";
+
+const rows = 3;
 
 const ReferenceSearch = () => {
   const [menuItem, setMenuItem] = useState<any>([]);
@@ -84,12 +87,23 @@ const ReferenceSearch = () => {
         </Text>
         <Spacer />
         <Text>{"Sort by\uFF1A"}</Text>
+        <Select
+          w="fit-content"
+          h="fit-content"
+          border="none"
+          _focus={{ ring: "none" }}
+        >
+          <option value="RANDOM">{"RANDOM"}</option>
+          <option value="DATE">{"DATE"}</option>
+          <option value="CHAR">{"A-Z \uFF08CAPITAL\uFF09"}</option>
+          <option value="RANDOM">{"RANDOM"}</option>
+        </Select>
       </HStack>
       <Accordion allowToggle>
         <AccordionItem>
           <AccordionButton p="0">
             <Box as="span" flex="1" textAlign="right">
-              Filter and Order by
+              {"Filter and Order by"}
             </Box>
             <FaChevronDown />
           </AccordionButton>
@@ -190,51 +204,29 @@ const ReferenceSearch = () => {
               setFilter([]);
             }}
           >
-            Clear All
+            {"Clear All"}
           </Button>
         </HStack>
       ) : (
         <></>
       )}
       {products.length ? (
-        <Flex w="100%" position="relative">
-          <VStack flex="1">
-            {products.map((product: any, i: number) => {
-              if (i % 3 !== 0 || i > limit * 3 - 1) return <></>;
-              return (
-                <DictionaryCard
-                  key={product.ProductId}
-                  product={product}
-                  onClick={clickHandler}
-                />
-              );
-            })}
-          </VStack>
-          <VStack flex="1">
-            {products.map((product: any, i: number) => {
-              if (i % 3 !== 1 || i > limit * 3 - 1) return <></>;
-              return (
-                <DictionaryCard
-                  key={product.ProductId}
-                  product={product}
-                  onClick={clickHandler}
-                />
-              );
-            })}
-          </VStack>
-          <VStack flex="1">
-            {products.map((product: any, i: number) => {
-              if (i % 3 !== 2 || i > limit * 3 - 1) return <></>;
-              return (
-                <DictionaryCard
-                  key={product.ProductId}
-                  product={product}
-                  onClick={clickHandler}
-                />
-              );
-            })}
-          </VStack>
-          {limit * 3 < products.length && (
+        <Flex w="100%" position="relative" gap="5rem">
+          {[...new Array(rows)].map((_, index) => (
+            <VStack flex="1" key={index}>
+              {products.map((product: any, i: number) => {
+                if (i % rows !== index || i > limit * rows - 1) return <></>;
+                return (
+                  <DictionaryCard
+                    key={product.ProductId}
+                    product={product}
+                    onClick={clickHandler}
+                  />
+                );
+              })}
+            </VStack>
+          ))}
+          {limit * rows < products.length && (
             <Button
               variant="link"
               position="absolute"
@@ -250,7 +242,7 @@ const ReferenceSearch = () => {
               }}
             >
               <VStack gap="0">
-                <Text>Seek your air</Text>
+                <Text>{"Seek your air"}</Text>
                 <FaChevronDown />
               </VStack>
             </Button>

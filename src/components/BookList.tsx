@@ -1,7 +1,6 @@
-import { Box, Container } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import { Container } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 import BookCard from "./BookCard";
-import { IndexType } from "typescript";
 
 type Props = {};
 const getBooks = async () => {
