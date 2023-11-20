@@ -36,13 +36,13 @@ const SideBar = () => {
           <AccordionPanel pb={4}>
             <VStack>
               <Box textAlign="left" w="100%">
-                <Link to="/#">{"Highlight \uFF06 Updated"}</Link>
+                <Link to="/#hero">{"Highlight \uFF06 Updated"}</Link>
               </Box>
               <Box textAlign="left" w="100%">
-                <Link to="/#">{"Reference Search"}</Link>
+                <Link to="/#reference-search">{"Reference Search"}</Link>
               </Box>
               <Box textAlign="left" w="100%">
-                <Link to="/#">{"Book"}</Link>
+                <Link to="/#book">{"Book"}</Link>
               </Box>
             </VStack>
           </AccordionPanel>

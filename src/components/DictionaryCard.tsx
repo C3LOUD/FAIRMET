@@ -7,16 +7,20 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import React from "react";
+import { Brand } from "../types";
 
-type Props = { product: any; onClick: (e: React.MouseEvent) => void };
+type Props = {
+  brand: Brand;
+  onClick: (e: React.MouseEvent) => void;
+};
 
-const DictionaryCard: React.FC<Props> = ({ product, onClick }) => {
+const DictionaryCard: React.FC<Props> = ({ brand, onClick }) => {
   return (
     <Card
       as="button"
       onClick={onClick}
       cursor="pointer"
-      id={product.ProductId}
+      id={brand.id}
       border="none"
       shadow="none"
       transform="auto"
@@ -24,20 +28,13 @@ const DictionaryCard: React.FC<Props> = ({ product, onClick }) => {
       maxW="18rem"
       _hover={{ bgColor: "gray.200" }}
     >
-      <CardHeader>{product.DisplayName}</CardHeader>
+      <CardHeader>{brand.title}</CardHeader>
       <CardBody p="0">
         <VStack>
-          <Image
+          {/* <Image
             src={product.Variants[0].ProductImages[0]}
             alt={product.DisplayName}
-          />
-          <Box
-            wordBreak="break-all"
-            whiteSpace="break-spaces"
-            dangerouslySetInnerHTML={{
-              __html: product.Description,
-            }}
-          />
+          /> */}
         </VStack>
       </CardBody>
     </Card>

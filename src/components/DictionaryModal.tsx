@@ -9,14 +9,15 @@ import {
   Image,
 } from "@chakra-ui/react";
 import React from "react";
+import { Brand } from "../types";
 
 type Props = {
   isOpen: boolean;
   onClose: () => void;
-  product: any;
+  brand: Brand;
 };
 
-const DictionaryModal: React.FC<Props> = ({ isOpen, onClose, product }) => {
+const DictionaryModal: React.FC<Props> = ({ isOpen, onClose, brand }) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
@@ -37,12 +38,12 @@ const DictionaryModal: React.FC<Props> = ({ isOpen, onClose, product }) => {
             },
           }}
         >
-          {product.Variants[0].ProductImages.map((src: string, i: number) => (
+          {/* {product.Variants[0].ProductImages.map((src: string, i: number) => (
             <Image
               src={src}
               alt={`${product.Variants[0].ColorName} ${i + 1}`}
             />
-          ))}
+          ))} */}
         </VStack>
         <Box>
           <ModalHeader>Modal Title</ModalHeader>

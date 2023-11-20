@@ -3,10 +3,12 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import SideBar from "./SideBar";
 import { RiCopyrightLine } from "react-icons/ri";
+import ScrollToHashElement from "../components/ScrollToHashElement";
 
 const RootLayout = () => {
   return (
     <Container as="main" maxW="90rem" px="0">
+      <ScrollToHashElement />
       <Flex gap="5rem">
         <Box maxW="13.75rem">
           <SideBar />

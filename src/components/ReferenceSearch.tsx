@@ -21,61 +21,53 @@ import React, { useEffect, useState } from "react";
 import { FaChevronDown } from "react-icons/fa6";
 import DictionaryCard from "./DictionaryCard";
 import DictionaryModal from "./DictionaryModal";
+import { Brand } from "../types";
 
 const rows = 3;
 
 const ReferenceSearch = () => {
   const [menuItem, setMenuItem] = useState<any>([]);
-  const [filter, setFilter] = useState<{ menu: string; option: string }[]>([]);
-  const [products, setProducts] = useState<any>([]);
+  const [filter, setFilter] = useState<string[]>([]);
+  const [brands, setBrands] = useState<Brand[]>([]);
   const [limit, setLimit] = useState<number>(4);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [activeProduct, setActiveProduct] = useState<any>();
+  const [activeBrand, setActiveBrand] = useState<Brand>();
 
   const clickHandler = (e: React.MouseEvent) => {
     e.preventDefault();
-    const product = products.find(
-      (product: { ProductId: string }) =>
-        product.ProductId === e.currentTarget.id
-    );
-    setActiveProduct(product);
+    const brand = brands.find((brand) => brand.id === e.currentTarget.id);
+    setActiveBrand(brand);
     onOpen();
   };
 
   useEffect(() => {
-    fetch("/data/category.json", {
+    fetch("/data/filter.json", {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
-    }).then((res) =>
-      res
-        .json()
-        .then((json) =>
-          setMenuItem(json.menuItemList[0].ChildMenus[7].ChildMenus)
-        )
-    );
+    }).then((res) => res.json().then((json) => setMenuItem(json.filter)));
   }, []);
 
   useEffect(() => {
-    fetch(`/data/${filter[0]?.option || "promo_basics"}.json`, {
+    fetch(`/data/brand.json`, {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
     }).then((res) => {
       if (!res.ok) return;
-      res.json().then((json) => setProducts(json.CatalogProducts));
+      res.json().then((json) => setBrands(json.brand));
     });
-  }, [filter]);
+  }, []);
 
   return (
-    <Box as="section" maxW="71.25rem">
-      {activeProduct && (
+    <Box as="section" maxW="71.25rem" id="reference-search">
+      {activeBrand && (
         <DictionaryModal
           isOpen={isOpen}
           onClose={onClose}
-          product={activeProduct}
+          brand={activeBrand}
         />
       )}
       <Heading>
@@ -111,74 +103,54 @@ const ReferenceSearch = () => {
           <AccordionPanel pb={4} bgColor="gray.200">
             <Grid templateColumns="repeat(4, 1fr)">
               {menuItem.length &&
-                menuItem.map((menu: any) => {
-                  return (
-                    <GridItem key={menu.Category} textAlign="center">
-                      <Box>
-                        <Text>{menu.Name}</Text>
-                        <Grid templateColumns="repeat(2, 1fr)" gap="0.5rem">
-                          {menu.ChildMenus.map((child: any) => (
-                            <GridItem key={child.Category}>
-                              <Button
-                                bgColor={
-                                  filter.some(
-                                    (el) =>
-                                      el.option === child.Category &&
-                                      el.menu === menu.Category
-                                  )
-                                    ? "gray.500"
-                                    : "white"
-                                }
-                                _hover={{
-                                  background: filter.some(
-                                    (el) =>
-                                      el.option === child.Category &&
-                                      el.menu === menu.Category
-                                  )
-                                    ? "gray.600"
-                                    : "gray.300",
-                                }}
-                                rounded="none"
-                                p="0"
-                                w="5rem"
-                                h="fit-content"
-                                wordBreak="break-word"
-                                border="1px"
-                                whiteSpace="break-spaces"
-                                fontSize="sm"
-                                key={child.Category}
-                                onClick={(e: React.MouseEvent) => {
-                                  e.preventDefault();
-                                  const newFilter = filter.some(
-                                    (el) =>
-                                      el.option === child.Category &&
-                                      el.menu === menu.Category
-                                  )
-                                    ? filter.filter(
-                                        (el) =>
-                                          el.option !== child.Category ||
-                                          el.menu !== menu.Category
-                                      )
-                                    : [
-                                        ...filter,
-                                        {
-                                          option: child.Category,
-                                          menu: menu.Category,
-                                        },
-                                      ];
-
-                                  setFilter(newFilter);
-                                }}
-                              >
-                                {child.Name}
-                              </Button>
-                            </GridItem>
-                          ))}
-                        </Grid>
-                      </Box>
-                    </GridItem>
-                  );
-                })}
+                menuItem.map(
+                  (menu: { id: string; type: string; options: string[] }) => {
+                    return (
+                      <GridItem key={menu.id} textAlign="center">
+                        <Box>
+                          <Text>{menu.type}</Text>
+                          <Grid templateColumns="repeat(2, 1fr)" gap="0.5rem">
+                            {menu.options.map((option: string, i: number) => (
+                              <GridItem key={i}>
+                                <Button
+                                  bgColor={
+                                    filter.includes(option)
+                                      ? "gray.500"
+                                      : "white"
+                                  }
+                                  _hover={{
+                                    background: filter.includes(option)
+                                      ? "gray.600"
+                                      : "gray.300",
+                                  }}
+                                  rounded="none"
+                                  p="0"
+                                  w="5rem"
+                                  h="fit-content"
+                                  wordBreak="break-word"
+                                  border="1px"
+                                  whiteSpace="break-spaces"
+                                  fontSize="sm"
+                                  onClick={(e: React.MouseEvent) => {
+                                    e.preventDefault();
+                                    const newFilter = filter.some(
+                                      (el) => el === option
+                                    )
+                                      ? filter.filter((el) => el !== option)
+                                      : [...filter, option];
+                                    setFilter(newFilter);
+                                  }}
+                                >
+                                  {option}
+                                </Button>
+                              </GridItem>
+                            ))}
+                          </Grid>
+                        </Box>
+                      </GridItem>
+                    );
+                  }
+                )}
             </Grid>
           </AccordionPanel>
         </AccordionItem>
@@ -186,8 +158,8 @@ const ReferenceSearch = () => {
       {filter.length ? (
         <HStack>
           {filter.map((el) => (
-            <Tag bgColor="white" rounded="none" border="1px" key={el.menu}>
-              {el.option}
+            <Tag bgColor="white" rounded="none" border="1px" key={el}>
+              {el}
             </Tag>
           ))}
           <Button
@@ -210,23 +182,23 @@ const ReferenceSearch = () => {
       ) : (
         <></>
       )}
-      {products.length ? (
+      {brands.length ? (
         <Flex w="100%" position="relative" gap="5rem">
           {[...new Array(rows)].map((_, index) => (
             <VStack flex="1" key={index}>
-              {products.map((product: any, i: number) => {
+              {brands.map((brand, i: number) => {
                 if (i % rows !== index || i > limit * rows - 1) return <></>;
                 return (
                   <DictionaryCard
-                    key={product.ProductId}
-                    product={product}
+                    key={brand.id}
+                    brand={brand}
                     onClick={clickHandler}
                   />
                 );
               })}
             </VStack>
           ))}
-          {limit * rows < products.length && (
+          {limit * rows < brands.length && (
             <Button
               variant="link"
               position="absolute"

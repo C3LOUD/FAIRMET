@@ -1,0 +1,179 @@
+{
+  "filter": [
+    {
+      "id": "cb27960a-3e59-4c2d-ba94-9f378de822c3",
+      "type": "Sort",
+      "options": [
+        "Brand",
+        "Store/Shop",
+        "Platform",
+        "Media",
+        "Influencer",
+        "Creator"
+      ]
+    },
+    {
+      "id": "ad22ec6c-c82e-46e6-94c3-47f507c1f764",
+      "type": "Style, Occasion & Dressing Type",
+      "options": [
+        "Biker",
+        "Smart Casual",
+        "Casual",
+        "Classic & Iconic",
+        "Basic (Versatile & Quiet)",
+        "Fashionable",
+        "Trendy",
+        "Chic & Smart",
+        "Formal",
+        "Leisure",
+        "Outdoor",
+        "Street",
+        "Vacation",
+        "Loungewear",
+        "Vintage (vintage-inspired)",
+        "Old-Classic",
+        "Streetwear",
+        "Sporty",
+        "Athletic",
+        "Business"
+      ]
+    },
+    {
+      "id": "8af87517-3a9d-401c-9e91-28450bb9ab9a",
+      "type": "Field",
+      "options": [
+        "Clothing",
+        "Footwear",
+        "Accessories",
+        "Jewellery",
+        "Eyewear",
+        "Watches",
+        "Fragrance & Perfumery",
+        "Bag, Luggage & Suitcase",
+        "Body & Hair Care",
+        "Beauty Tools",
+        "Lifestyle & Homeware",
+        "Cosmetics & Skincare Products",
+        "Hair Styling Products",
+        "Fashion",
+        "Business",
+        "Style",
+        "Design & Art",
+        "Activity"
+      ]
+    },
+    {
+      "id": "e9c712b8-71db-4a5a-8154-315703e332ec",
+      "type": "Item & Category",
+      "options": [
+        "T-shirt",
+        "Shirts",
+        "Vest",
+        "Jackets",
+        "Coats",
+        "Outerwear",
+        "Blazers",
+        "Suits",
+        "Denim",
+        "Shorts",
+        "Jeans",
+        "Skirts",
+        "Dresses",
+        "Pants / Trousers (Bottoms)",
+        "Shoes (incl. Sneakers & Boots)",
+        "Knitwear",
+        "Jumpsuits",
+        "Sweats",
+        "Activewear",
+        "Swimwear / Beachwear",
+        "Hats / Caps",
+        "Scarves / Silk Scarves",
+        "Bags",
+        "Luggage & Suitcase",
+        "Fragrances",
+        "Hair Tools",
+        "Nail Tools",
+        "Makeup Tools",
+        "Body & Bath",
+        "Hair Care"
+      ]
+    },
+    {
+      "id": "a7ea91da-61cc-4ff1-8bc9-1b82bf46aede",
+      "type": "Specific Item",
+      "options": [
+        "Leather Jacket",
+        "White Sneaker",
+        "Trench Coat",
+        "Leather Gloves",
+        "Parka",
+        "Luggage",
+        "Scarf",
+        "Puffer Jacket",
+        "Formal (Business) Shirt",
+        "Blazer",
+        "Silk Scarf",
+        "Flower & Floral Design",
+        "Floral Shirt",
+        "Paisley Shirt",
+        "Silk Shirt",
+        "Voile Shirt",
+        "White high top Sneaker",
+        "Chelsea Boots",
+        "Asymmetric T-shirt",
+        "Mock-Neck T-shirt",
+        "Print Shirt"
+      ]
+    },
+    {
+      "id": "df23c646-158d-4213-b76f-2b2e725267a0",
+      "type": "Function & Activity",
+      "options": [
+        "Tennis",
+        "Training",
+        "Golf",
+        "Fitness",
+        "Boxing",
+        "Motor",
+        "Hiking",
+        "Hunting",
+        "Banquet",
+        "Swimming & Surfing",
+        "Biking",
+        "Urban & Modern",
+        "Business (office)",
+        "Sportswear"
+      ]
+    },
+    {
+      "id": "c1701d6a-5b24-4b65-b8da-373a6e20e31a",
+      "type": "Country & Region",
+      "options": [
+        "Japan",
+        "South Korea",
+        "United States",
+        "United Kingdom",
+        "France",
+        "Italy",
+        "Germany",
+        "Turkey"
+      ]
+    },
+    {
+      "id": "d0e58f1c-4d71-4d35-b158-26d65f4a2ecf",
+      "type": "Price",
+      "options": [
+        "$ (Cheap)",
+        "$$ (Low)",
+        "$$$ (Affordable)",
+        "$$$$ (Expensive)",
+        "$$$$$ (Prestige & Exclusive)"
+      ]
+    },
+    {
+      "id": "e48e1359-1850-4e0b-a9c8-0b810b1f0b17",
+      "type": "Gender",
+      "options": ["His", "Hers", "I don't care"]
+    }
+  ]
+}

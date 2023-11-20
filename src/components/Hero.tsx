@@ -45,9 +45,10 @@ const Hero = () => {
   };
 
   return (
-    <Box as="section">
+    <Box as="section" id="hero">
       <Box position="relative">
         <Grid
+          maxW="71.25rem"
           gap="0.5rem"
           gridAutoFlow="column"
           overflowX="auto"
