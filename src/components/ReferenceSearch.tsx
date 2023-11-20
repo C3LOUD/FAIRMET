@@ -21,12 +21,12 @@ import React, { useEffect, useState } from "react";
 import { FaChevronDown } from "react-icons/fa6";
 import DictionaryCard from "./DictionaryCard";
 import DictionaryModal from "./DictionaryModal";
-import { Brand } from "../types";
+import { Brand, Filter } from "../types";
 
 const rows = 3;
 
 const ReferenceSearch = () => {
-  const [menuItem, setMenuItem] = useState<any>([]);
+  const [menuItem, setMenuItem] = useState<Filter[]>([]);
   const [filter, setFilter] = useState<string[]>([]);
   const [brands, setBrands] = useState<Brand[]>([]);
   const [limit, setLimit] = useState<number>(4);
@@ -103,54 +103,50 @@ const ReferenceSearch = () => {
           <AccordionPanel pb={4} bgColor="gray.200">
             <Grid templateColumns="repeat(4, 1fr)">
               {menuItem.length &&
-                menuItem.map(
-                  (menu: { id: string; type: string; options: string[] }) => {
-                    return (
-                      <GridItem key={menu.id} textAlign="center">
-                        <Box>
-                          <Text>{menu.type}</Text>
-                          <Grid templateColumns="repeat(2, 1fr)" gap="0.5rem">
-                            {menu.options.map((option: string, i: number) => (
-                              <GridItem key={i}>
-                                <Button
-                                  bgColor={
-                                    filter.includes(option)
-                                      ? "gray.500"
-                                      : "white"
-                                  }
-                                  _hover={{
-                                    background: filter.includes(option)
-                                      ? "gray.600"
-                                      : "gray.300",
-                                  }}
-                                  rounded="none"
-                                  p="0"
-                                  w="5rem"
-                                  h="fit-content"
-                                  wordBreak="break-word"
-                                  border="1px"
-                                  whiteSpace="break-spaces"
-                                  fontSize="sm"
-                                  onClick={(e: React.MouseEvent) => {
-                                    e.preventDefault();
-                                    const newFilter = filter.some(
-                                      (el) => el === option
-                                    )
-                                      ? filter.filter((el) => el !== option)
-                                      : [...filter, option];
-                                    setFilter(newFilter);
-                                  }}
-                                >
-                                  {option}
-                                </Button>
-                              </GridItem>
-                            ))}
-                          </Grid>
-                        </Box>
-                      </GridItem>
-                    );
-                  }
-                )}
+                menuItem.map((menu) => {
+                  return (
+                    <GridItem key={menu.id} textAlign="center">
+                      <Box>
+                        <Text>{menu.type}</Text>
+                        <Grid templateColumns="repeat(2, 1fr)" gap="0.5rem">
+                          {menu.options.map((option: string, i: number) => (
+                            <GridItem key={i}>
+                              <Button
+                                bgColor={
+                                  filter.includes(option) ? "gray.500" : "white"
+                                }
+                                _hover={{
+                                  background: filter.includes(option)
+                                    ? "gray.600"
+                                    : "gray.300",
+                                }}
+                                rounded="none"
+                                p="0"
+                                w="5rem"
+                                h="fit-content"
+                                wordBreak="break-word"
+                                border="1px"
+                                whiteSpace="break-spaces"
+                                fontSize="sm"
+                                onClick={(e: React.MouseEvent) => {
+                                  e.preventDefault();
+                                  const newFilter = filter.some(
+                                    (el) => el === option
+                                  )
+                                    ? filter.filter((el) => el !== option)
+                                    : [...filter, option];
+                                  setFilter(newFilter);
+                                }}
+                              >
+                                {option}
+                              </Button>
+                            </GridItem>
+                          ))}
+                        </Grid>
+                      </Box>
+                    </GridItem>
+                  );
+                })}
             </Grid>
           </AccordionPanel>
         </AccordionItem>

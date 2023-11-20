@@ -3,3 +3,9 @@ export type Brand = {
   title: string;
   content: string;
 };
+
+export type Filter = {
+  id: string;
+  type: string;
+  options: string[];
+};
