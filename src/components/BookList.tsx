@@ -2,12 +2,11 @@ import { Container } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import BookCard from "./BookCard";
 
-type Props = {};
 const getBooks = async () => {
   return [1, 2, 3, 4];
 };
 
-const BookList = (props: Props) => {
+const BookList = () => {
   const [books, setBooks] = useState<any>([]);
 
   useEffect(() => {
@@ -15,7 +14,7 @@ const BookList = (props: Props) => {
   }, []);
 
   return (
-    <Container bgColor="green" maxW="52rem" w="100%">
+    <Container maxW="52rem" w="100%">
       {books.map((book: any, i: number) => (
         <BookCard key={i} />
       ))}

@@ -1,11 +1,4 @@
-import {
-  Box,
-  Card,
-  CardBody,
-  CardHeader,
-  Image,
-  VStack,
-} from "@chakra-ui/react";
+import { Card, CardBody, CardHeader, VStack } from "@chakra-ui/react";
 import React from "react";
 import { Brand } from "../types";
 
@@ -17,6 +10,7 @@ type Props = {
 const DictionaryCard: React.FC<Props> = ({ brand, onClick }) => {
   return (
     <Card
+      w="18rem"
       as="button"
       onClick={onClick}
       cursor="pointer"
@@ -26,7 +20,7 @@ const DictionaryCard: React.FC<Props> = ({ brand, onClick }) => {
       transform="auto"
       transition="all"
       maxW="18rem"
-      _hover={{ bgColor: "gray.200" }}
+      _hover={{ bgColor: "tint.500" }}
     >
       <CardHeader>{brand.title}</CardHeader>
       <CardBody p="0">

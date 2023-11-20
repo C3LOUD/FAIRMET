@@ -1,9 +1,7 @@
 import { Card } from "@chakra-ui/react";
 import React from "react";
 
-type Props = {};
-
-const BookCard = (props: Props) => {
+const BookCard = () => {
   return <Card>BookCard</Card>;
 };
 

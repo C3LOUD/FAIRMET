@@ -62,7 +62,7 @@ const ReferenceSearch = () => {
   }, []);
 
   return (
-    <Box as="section" maxW="71.25rem" id="reference-search">
+    <Box as="section" maxW="71.25rem" id="reference-search" mb="4rem">
       {activeBrand && (
         <DictionaryModal
           isOpen={isOpen}
@@ -109,39 +109,50 @@ const ReferenceSearch = () => {
                       <Box>
                         <Text>{menu.type}</Text>
                         <Grid templateColumns="repeat(2, 1fr)" gap="0.5rem">
-                          {menu.options.map((option: string, i: number) => (
-                            <GridItem key={i}>
-                              <Button
-                                bgColor={
-                                  filter.includes(option) ? "gray.500" : "white"
-                                }
-                                _hover={{
-                                  background: filter.includes(option)
-                                    ? "gray.600"
-                                    : "gray.300",
-                                }}
-                                rounded="none"
-                                p="0"
-                                w="5rem"
-                                h="fit-content"
-                                wordBreak="break-word"
-                                border="1px"
-                                whiteSpace="break-spaces"
-                                fontSize="sm"
-                                onClick={(e: React.MouseEvent) => {
-                                  e.preventDefault();
-                                  const newFilter = filter.some(
-                                    (el) => el === option
-                                  )
-                                    ? filter.filter((el) => el !== option)
-                                    : [...filter, option];
-                                  setFilter(newFilter);
-                                }}
-                              >
-                                {option}
-                              </Button>
-                            </GridItem>
-                          ))}
+                          {menu.options.map((option: string, i: number) => {
+                            const isActive = filter.includes(option);
+                            return (
+                              <GridItem key={i}>
+                                <Button
+                                  boxShadow={
+                                    isActive
+                                      ? "1px 1px 0 2px var(--chakra-colors-shade-500) inset"
+                                      : "1px 1px 0 1px var(--chakra-colors-shade-500)"
+                                  }
+                                  bgColor={isActive ? "shade.200" : "primary"}
+                                  _hover={{
+                                    background: isActive
+                                      ? "shade.300"
+                                      : "shade.100",
+                                  }}
+                                  _active={{
+                                    boxShadow:
+                                      "1px 1px 1px 1px var(--chakra-colors-shade-500) inset",
+                                    background: isActive
+                                      ? "shade.400"
+                                      : "shade.200",
+                                  }}
+                                  rounded="none"
+                                  p="0"
+                                  w="5rem"
+                                  h="fit-content"
+                                  wordBreak="break-word"
+                                  border="1px"
+                                  whiteSpace="break-spaces"
+                                  fontSize="sm"
+                                  onClick={(e: React.MouseEvent) => {
+                                    e.preventDefault();
+                                    const newFilter = isActive
+                                      ? filter.filter((el) => el !== option)
+                                      : [...filter, option];
+                                    setFilter(newFilter);
+                                  }}
+                                >
+                                  {option}
+                                </Button>
+                              </GridItem>
+                            );
+                          })}
                         </Grid>
                       </Box>
                     </GridItem>
@@ -165,7 +176,7 @@ const ReferenceSearch = () => {
             fontStyle="italic"
             _hover={{
               border: "none",
-              textColor: "gray.300",
+              textColor: "shade",
             }}
             onClick={(e: React.MouseEvent) => {
               e.preventDefault();

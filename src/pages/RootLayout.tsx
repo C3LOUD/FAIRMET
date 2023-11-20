@@ -7,28 +7,30 @@ import ScrollToHashElement from "../components/ScrollToHashElement";
 
 const RootLayout = () => {
   return (
-    <Container as="main" maxW="90rem" px="0">
-      <ScrollToHashElement />
-      <Flex gap="5rem">
-        <Box maxW="13.75rem">
-          <SideBar />
-        </Box>
-        <Flex flexDirection="column" px="0" w="100%">
-          <Image
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Hololive_Production_logo.svg/512px-Hololive_Production_logo.svg.png"
-            alt="logo"
-            objectFit="contain"
-            h="5rem"
-          />
-          <Outlet />
-          <HStack alignSelf="center" w="fit-content">
-            <Text>{"Copyright"}</Text>
-            <RiCopyrightLine />
-            <Text>{"2023 Owner. \u00A0All rights reserved"}</Text>
-          </HStack>
+    <Box bgColor="primary" textColor="secondary">
+      <Container as="main" maxW="90rem" px="0">
+        <ScrollToHashElement />
+        <Flex gap="5rem">
+          <Box maxW="13.75rem">
+            <SideBar />
+          </Box>
+          <Flex flexDirection="column" px="0" w="100%">
+            <Image
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Hololive_Production_logo.svg/512px-Hololive_Production_logo.svg.png"
+              alt="logo"
+              objectFit="contain"
+              h="5rem"
+            />
+            <Outlet />
+            <HStack alignSelf="center" w="fit-content">
+              <Text>{"Copyright"}</Text>
+              <RiCopyrightLine />
+              <Text>{"2023 Owner. \u00A0All rights reserved"}</Text>
+            </HStack>
+          </Flex>
         </Flex>
-      </Flex>
-    </Container>
+      </Container>
+    </Box>
   );
 };
 
