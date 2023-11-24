@@ -7,19 +7,22 @@ import ScrollToHashElement from '../components/ScrollToHashElement';
 
 const RootLayout = () => {
 	return (
-		<Box bgColor="primary" textColor="secondary">
-			<Container as="main" maxW={{ base: '48rem', md: '60rem', lg: '90rem' }} px="2%">
+		<Box bgColor="primary" textColor="secondary" minH="100vh">
+			<Container as="main" maxW={{ base: '48rem', md: '64rem', lg: '90rem' }} bgColor="white">
 				<ScrollToHashElement />
-				<Flex gap={{ base: '2rem' }} w="100%" justifyContent="center">
-					<Box maxW="13.75rem" w="15%" display={{ base: 'none', md: 'block' }}>
+				<Flex w="100%" justifyContent="center" gap={2}>
+					<Box w="20%" display={{ base: 'none', md: 'block' }}>
 						<SideBar />
 					</Box>
-					<Flex flexDirection="column" px="0" w="80%">
+					<Flex flexDirection="column" px="0" w={{ base: '100%', md: '80%' }}>
 						<Image
-							src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Hololive_Production_logo.svg/512px-Hololive_Production_logo.svg.png"
+							src="/image/logo.svg"
 							alt="logo"
 							objectFit="contain"
 							h="5rem"
+							px={8}
+							w="100%"
+							align={{ base: 'left', md: 'center' }}
 						/>
 						<Outlet />
 						<HStack alignSelf="center" w="fit-content">

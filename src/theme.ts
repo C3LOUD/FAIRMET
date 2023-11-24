@@ -5,7 +5,7 @@ export const theme = extendTheme({
 		base: '0px',
 		sm: '320px',
 		md: '768px',
-		lg: '960px',
+		lg: '1024px',
 		xl: '1440px',
 	},
 	fonts: {

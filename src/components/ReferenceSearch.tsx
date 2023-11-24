@@ -62,7 +62,7 @@ const ReferenceSearch = () => {
 	}, []);
 
 	return (
-		<Box as="section" maxW="71.25rem" id="reference-search" mb="4rem">
+		<Box as="section" id="reference-search" mb="4rem">
 			{activeBrand && <DictionaryModal isOpen={isOpen} onClose={onClose} brand={activeBrand} />}
 			<Heading>{'Reference Search \u3010Collection コレクション\u3011'}</Heading>
 			<HStack>
@@ -145,8 +145,8 @@ const ReferenceSearch = () => {
 			</Accordion>
 			{filter.length ? (
 				<HStack>
-					{filter.map((el) => (
-						<Tag bgColor="white" rounded="none" border="1px" key={el}>
+					{filter.map((el, i) => (
+						<Tag bgColor="white" rounded="none" border="1px" key={i}>
 							{el}
 						</Tag>
 					))}

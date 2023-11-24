@@ -104,7 +104,7 @@ const Hero = () => {
 	};
 
 	return (
-		<Box as="section" id="hero">
+		<Box as="section" id="hero" w="100%">
 			<Box position="relative">
 				<Box overflow="hidden" ref={containerRef}>
 					<Box
