@@ -1,9 +1,10 @@
 import { Box, Container, Heading, Text } from "@chakra-ui/react";
-import BookList from "../components/BookList";
+import BookCarousel from "../components/BookCarousel";
+import BookFooterSection from "../components/BookFooterSection";
+import BookSection from "../components/BookSection";
 import BrandCarousel from "../components/BrandCarousel";
 import HeroCarousel from "../components/HeroCarousel";
 import ReferenceSearch from "../components/ReferenceSearch";
-import BookCarousel from "../components/BookCarousel";
 
 const Landing = () => {
   return (
@@ -25,10 +26,10 @@ const Landing = () => {
           HIGHLIGHTS
         </Text>
         <BookCarousel />
-        <BookList showTab showTitle />
+        <BookSection />
         <Heading borderBottom="2px">{"Brand コレクション"}</Heading>
         <BrandCarousel />
-        <BookList />
+        <BookFooterSection />
       </Box>
     </Container>
   );

@@ -32,6 +32,7 @@ const Pagination = ({ total, currentPage, setCurrentPage }: Props) => {
         Array.from({ length: total }, (_, index) => index + 1).map((page) => {
           return (
             <PaginationButton
+              key={page}
               page={page}
               currentPage={currentPage}
               onClick={(e) => {

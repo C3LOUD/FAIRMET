@@ -184,7 +184,7 @@ const ReferenceSearch = () => {
           {[...new Array(rows)].map((_, index) => (
             <VStack flex="1" key={index}>
               {brands.map((brand, i: number) => {
-                if (i % rows !== index || i > limit * rows - 1) return <></>;
+                if (i % rows !== index || i > limit * rows - 1) return;
                 return (
                   <DictionaryCard
                     key={brand.id}

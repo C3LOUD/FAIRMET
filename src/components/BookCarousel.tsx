@@ -26,14 +26,14 @@ const BookCarousel = () => {
     <Carousel isReady={!isLoading}>
       {bookCardList.map((bookCard, i) => (
         <GridItem
-          key={bookCard?.id}
+          key={bookCard.id}
           position="relative"
           h="100%"
           minW="max-content"
         >
           <Image
-            src={bookCard?.image}
-            alt={bookCard?.title}
+            src={bookCard.image}
+            alt={bookCard.title}
             h="36rem"
             objectFit="cover"
             onLoadStart={() => {
@@ -61,7 +61,7 @@ const BookCarousel = () => {
             w="100%"
             maxW="80%"
           >
-            {bookCard?.title}
+            {bookCard.title}
           </Text>
         </GridItem>
       ))}
