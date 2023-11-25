@@ -48,7 +48,7 @@ const ReferenceSearch = () => {
   }, []);
 
   useEffect(() => {
-    getBrands().then((res) => setBrands(res));
+    getBrands({}).then((res) => setBrands(res));
   }, []);
 
   return (

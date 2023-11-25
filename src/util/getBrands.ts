@@ -1,6 +1,10 @@
 import { Brand } from "../types";
 
-export const getBrands = async (): Promise<Brand[]> => {
+type Args = {
+  limit?: number;
+};
+
+export const getBrands = async ({ limit }: Args): Promise<Brand[]> => {
   const res = await fetch(`/data/brand.json`, {
     headers: {
       "Content-Type": "application/json",
@@ -9,5 +13,11 @@ export const getBrands = async (): Promise<Brand[]> => {
   });
 
   const json = await res.json();
-  return json.brands;
+  const brands = [];
+  for (const brand of json.brands) {
+    if (limit && brands.length >= limit) break;
+    brands.push(brand);
+  }
+
+  return brands;
 };
