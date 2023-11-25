@@ -1,5 +1,5 @@
 {
-  "brand": [
+  "brandNoImage": [
     {
       "id": "69d56e31-ae61-4aa7-90cc-26953b4d6e00",
       "title": "ブルーナボイン",
@@ -35,12 +35,14 @@
       "title": "Eleventy Milano"
     },
     { "id": "cb5ec543-d003-441c-974d-28b06e87a5ea", "title": "Marni" },
-    { "id": "2c105f47-f4e2-4d08-b13d-a277f315e4d8", "title": "Penhaligon's" },
     {
       "id": "b404e6b5-0d5c-4a67-994f-feb2a29dc7af",
       "title": "Sacai",
       "content": "Founded in 1999 by designer Chitose Abe, Japanese label Sacai specializes in crafting avant-garde clothes. With a strong design background, Chitose Abe continually crafts luxury staples using high-quality fabrics and edgy, experimental styles. The result is a modern take on traditional silhouettes and an adrogynous approach to both menswear and womenswear.\n"
-    },
+    }
+  ],
+  "brand": [
+    { "id": "2c105f47-f4e2-4d08-b13d-a277f315e4d8", "title": "Penhaligon's" },
     {
       "id": "a27694e8-b892-4e12-bcd0-f04b0c0b59ee",
       "title": "Carhartt",
@@ -68,13 +70,43 @@
     },
     {
       "id": "5e73f753-9d64-44fd-a6fe-0a58a41754de",
-      "title": "imogene + willie ",
+      "title": "imogene + willie",
       "content": "The little boy scrunched up his face and mustered up his courage and asked his grandfather a probing question: “Are you a redneck?”\n\nGrandpa Leo said he reckoned he was.\n\nThe boy smiled: He wasn’t sure what a redneck was, just heard the word from friends around his hometown of Henderson, Ky., but he knew he loved Grandpa Leo a whole lot. And if Grandpa was a redneck, that was OK by him.\n\nGrandpa Leo Eddmenson would take his grandson to flea markets and rummage sales. That’s when the boy, Matt Eddmenson, became fascinated with comic books and the pictures in them.\n\nMatt Eddmenson, right, and his grandfather Leo Eddmenson in 1980 with a soapbox car they built together\n“My time was spent on comic book covers, learning how to draw them,” Eddmenson said. “I would trace it over and over again, the same one, and finally, I developed this talent.”\n\nThe obsession turned into a craving to create art of all kind. Years later, Eddmenson, with his wife, Carrie, would turn his love of art into creating and styling high-end jeans. In 2009, the two launched imogene + willie in 12South, Nashville’s trendiest jeans store.\n\nWe didn’t have to spend too much time in Nashville to notice the tight-knit community of artisans and creatives. While in town, we spent time with a handful of Nashville characters in their local businesses—Barista Parlor, Third Man Records, Sideshow Sign Co., Parlour and Juke, and Imogene + Willie—to get to know the people behind the burgeoning Nashville brands.\n\nWe can’t seem to stop raving about Imogene + Willie, and the community that the store has helped to foster in Nashville. Nearly every person that we met with while we were in town is connected to the store in some way—either their product is carried there, they used to work there, shop there, or are simply friends with them. Regardless of the connection, they’ve brought together a really phenomenal group of people.\n"
     },
     {
       "id": "8f5f06e0-2977-4fb4-b449-7f25e5c21d3e",
       "title": "J.M. Weston",
       "content": "Speaking of the prestigious French leather shoes manufacturer, “J.M. Weston (J.M.WESTON). The brand attracts the world with products that symbolize French traditional, such as the “180 Signature Loafer,” which can be called the symbol of the brand, and the “641 Golf,” a U-tip with a rounded silhouette that is very popular. In this issue, we focus on J.M. Weston’s leather shoes, introducing the brand’s appeal and standard items!\n\nAbout J.M. Weston\nJ.M. Weston is a long-established shoe brand founded in France in 1891. Elegant leather shoes made with the highest attention to materials and details have been loved in France for a long time. In 1986, J.M. Weston opened its first boutique outside of Japan in New York, the United States. This was followed by Geneva in 1988, Tokyo in 1993, and Hong Kong in 2004. The leather shoes embodying French elegance have been accepted globally, and currently there are 40 stores worldwide.\n\nHow the J.M. Weston brand was born\nAt the end of the 19th century, Édouard Blanchard founded ” Blanchard “, a factory for men’s and women’s shoes in the Limoges region of France. This shoe factory, which was born in a region with a rich history of tanning and leather processing, was the predecessor of J.M. Weston.\n"
-    }
+    },
+    {
+      "id": "3c1399d9-b8dd-4ac3-b1fc-6fac9017fb58",
+      "title": "Beara Beara",
+      "content": "Step into the world of Beara Beara, where craftsmanship meets timeless elegance. Inspired by the spirit of adventure and a love for quality, Beara Beara takes you on a journey through uniquely crafted leather goods that tell stories of exploration and discovery. Picture yourself traversing cobbled streets with a Beara Beara bag slung over your shoulder, each piece an embodiment of artistry and durability. From the bustling cityscape to the rugged terrains, our leather accessories seamlessly blend style with functionality. Just like the little boy captivated by comic book covers in the story of imogene + willie, you too can find that enchantment in the exquisite details of Beara Beara's creations. Whether you're drawn to the rich textures or the carefully stitched seams, every Beara Beara product is a testament to the passion we pour into our craft. Join us in embracing the beauty of timeless leather goods that transcend trends, and let Beara Beara be your companion on your next adventure."
+    },
+    {
+      "id": "d3a2684f-1b28-490d-a089-3f645480433d",
+      "title": "Cartier"
+    },
+    {
+      "id": "3ac0b137-6737-433d-911d-e987964a54c1",
+      "title": "Gigi Burris Millinery"
+    },
+    {
+      "id": "61f11c52-2531-4135-a7d8-fb60fea9aef1",
+      "title": "Lorraine Schwartz"
+    },
+    { "id": "c648c57d-7e11-4a31-81c1-aeb671a7297a", "title": "lululemon" },
+    { "id": "9ef6bf99-4ca9-43a4-98d5-e4961ca53425", "title": "Movado" },
+    {
+      "id": "9f15e63f-ffce-4832-9f6d-fdfc09786fcb",
+      "title": "Palladium Boots"
+    },
+    { "id": "b516ebd7-5411-44fa-bbf8-40953112f987", "title": "Patcharavipa" },
+    { "id": "8b9af4a4-9f32-4065-a9f5-942601e39cc7", "title": "Paul Smith" },
+    { "id": "78bc2271-57c2-48aa-a77f-9cf4028aee88", "title": "REVOLVE" },
+    { "id": "00143b33-6281-4795-8d3a-5b861f784530", "title": "SWAROVSKI" },
+    { "id": "7a9bc1f3-711b-4e31-81ea-cfbaa841721a", "title": "Tecovas" },
+    { "id": "69ceb948-412b-4603-af33-ffab47b51a7c", "title": "UNDERCOVER" },
+    { "id": "bdc3ceae-e8e9-4607-91c0-7181c8d02b6f", "title": "Victoria Ragna" }
   ]
 }
