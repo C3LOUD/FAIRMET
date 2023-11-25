@@ -14,6 +14,8 @@ const cardLength = 10;
 
 const Hero = () => {
   const [heroCardList, setHeroCardList] = useState<HeroCard[]>([]);
+  const [imageLoading, setImageLoading] = useState<boolean[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   useEffect(() => {
     const res = new Array(cardLength).fill(null).map((_, i) => ({
       id: faker.string.uuid(),
@@ -28,10 +30,15 @@ const Hero = () => {
     setHeroCardList(res);
   }, []);
 
+  useEffect(() => {
+    const allImageIsLoaded = imageLoading.every((status) => !status);
+    setIsLoading(!allImageIsLoaded);
+  }, [imageLoading]);
+
   return (
     <Box as="section" id="hero" w="100%">
-      <Carousel>
-        {heroCardList.map((heroCard) => (
+      <Carousel isReady={!isLoading} showProgressBar>
+        {heroCardList.map((heroCard, i) => (
           <GridItem
             key={heroCard?.id}
             position="relative"
@@ -43,6 +50,20 @@ const Hero = () => {
               alt={heroCard?.title}
               h="36rem"
               objectFit="cover"
+              onLoadStart={() => {
+                setImageLoading((prev) => {
+                  const newArr = [...prev];
+                  newArr[i] = true;
+                  return newArr;
+                });
+              }}
+              onLoad={() => {
+                setImageLoading((prev) => {
+                  const newArr = [...prev];
+                  newArr[i] = false;
+                  return newArr;
+                });
+              }}
             />
             <Text
               bg="white"

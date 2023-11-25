@@ -2,17 +2,28 @@ import {
   Box,
   Button,
   Grid,
+  Skeleton,
   Slider,
   SliderThumb,
   SliderTrack,
 } from "@chakra-ui/react";
-import { PropsWithChildren, useRef, useState } from "react";
+import { PropsWithChildren, useEffect, useRef, useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 
-const Carousel: React.FC<PropsWithChildren> = ({ children }) => {
+type Props = {
+  isReady: boolean;
+  showProgressBar?: boolean;
+};
+
+const Carousel: React.FC<PropsWithChildren<Props>> = ({
+  isReady,
+  children,
+  showProgressBar,
+}) => {
   const [showLeftBtn, setShowLeftBtn] = useState<boolean>(false);
   const [showRightBtn, setShowRightBtn] = useState<boolean>(true);
   const [currentOffset, setCurrentOffset] = useState<number>(0);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const ref = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
@@ -98,119 +109,129 @@ const Carousel: React.FC<PropsWithChildren> = ({ children }) => {
     innerRef.current?.scrollTo(offset, 0);
   };
 
+  useEffect(() => {
+    setIsLoading(
+      !ref.current?.offsetWidth &&
+        !innerRef.current?.offsetWidth &&
+        !containerRef.current?.offsetWidth
+    );
+  }, [
+    ref.current?.offsetWidth,
+    innerRef.current?.offsetWidth,
+    containerRef.current?.offsetWidth,
+  ]);
+
   return (
     <Box position="relative">
-      <Box
-        position="absolute"
-        width="100%"
-        height="100%"
-        bgColor="pink"
-        zIndex={10}
-      >
-        This is modal
-      </Box>
-      <Box
-        position="absolute"
-        width="20%"
-        top="0"
-        right="0"
-        transform="auto"
-        translateY="-100%"
-      >
-        <Box position="relative">
-          <Slider
-            aria-label="slider-ex-1"
-            overflow="hidden"
-            defaultValue={0}
-            value={currentOffset}
-          >
-            <SliderTrack />
-            <SliderThumb
-              transition="linear"
-              transitionDuration="0.1s"
-              rounded="none"
-              h="100%"
-              w={containerRef.current?.offsetWidth! / ref.current?.offsetWidth!}
-              bgColor="secondary"
-            />
-          </Slider>
+      <Skeleton isLoaded={!isLoading && isReady}>
+        {showProgressBar && (
           <Box
-            zIndex={10}
-            w="100%"
-            h="100%"
-            bgColor="transparent"
             position="absolute"
+            width="20%"
             top="0"
-            left="0"
-          />
-        </Box>
-      </Box>
-      <Box overflow="hidden" ref={containerRef}>
-        <Box
-          overflowX="auto"
-          scrollBehavior="smooth"
-          ref={innerRef}
-          onScroll={onScrollHandler}
-          css={{
-            "&::-webkit-scrollbar": {
-              display: "none",
-            },
-          }}
-        >
-          <Grid
-            ref={ref}
-            w="max-content"
-            maxW="max-content"
-            gap="0.5rem"
-            gridAutoFlow="column"
-            h="36rem"
+            right="0"
+            transform="auto"
+            translateY="-100%"
           >
-            {children}
-          </Grid>
+            <Box position="relative">
+              <Slider
+                aria-label="slider-ex-1"
+                overflow="hidden"
+                defaultValue={0}
+                value={currentOffset}
+              >
+                <SliderTrack />
+                <SliderThumb
+                  transition="linear"
+                  transitionDuration="0.1s"
+                  rounded="none"
+                  h="100%"
+                  w={
+                    containerRef.current?.offsetWidth! /
+                    ref.current?.offsetWidth!
+                  }
+                  bgColor="secondary"
+                />
+              </Slider>
+              <Box
+                zIndex={10}
+                w="100%"
+                h="100%"
+                bgColor="transparent"
+                position="absolute"
+                top="0"
+                left="0"
+              />
+            </Box>
+          </Box>
+        )}
+        <Box overflow="hidden" ref={containerRef}>
+          <Box
+            overflowX="auto"
+            scrollBehavior="smooth"
+            ref={innerRef}
+            onScroll={onScrollHandler}
+            css={{
+              "&::-webkit-scrollbar": {
+                display: "none",
+              },
+            }}
+          >
+            <Grid
+              ref={ref}
+              w="max-content"
+              maxW="max-content"
+              gap="0.5rem"
+              gridAutoFlow="column"
+              h="36rem"
+            >
+              {children}
+            </Grid>
+          </Box>
         </Box>
-      </Box>
-      {showLeftBtn && (
-        <Button
-          variant="unstyled"
-          textColor="secondary"
-          position="absolute"
-          fontSize="28"
-          rounded="none"
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          transform="auto"
-          top="50%"
-          translateY="-50%"
-          left="0"
-          bg="white"
-          p="0"
-          onClick={leftHandler}
-        >
-          <FaChevronLeft />
-        </Button>
-      )}
-      {showRightBtn && (
-        <Button
-          variant="unstyled"
-          textColor="secondary"
-          position="absolute"
-          fontSize="28"
-          bgColor="white"
-          rounded="none"
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          transform="auto"
-          top="50%"
-          translateY="-50%"
-          right="0"
-          p="0"
-          onClick={rightHandler}
-        >
-          <FaChevronRight />
-        </Button>
-      )}
+        {showLeftBtn && (
+          <Button
+            variant="unstyled"
+            textColor="secondary"
+            position="absolute"
+            fontSize="28"
+            rounded="none"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            transform="auto"
+            top="50%"
+            translateY="-50%"
+            left="0"
+            bg="white"
+            p="0"
+            onClick={leftHandler}
+          >
+            <FaChevronLeft />
+          </Button>
+        )}
+        {showRightBtn && (
+          <Button
+            variant="unstyled"
+            textColor="secondary"
+            position="absolute"
+            fontSize="28"
+            bgColor="white"
+            rounded="none"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            transform="auto"
+            top="50%"
+            translateY="-50%"
+            right="0"
+            p="0"
+            onClick={rightHandler}
+          >
+            <FaChevronRight />
+          </Button>
+        )}
+      </Skeleton>
     </Box>
   );
 };

@@ -16,13 +16,16 @@ const DictionaryCard: React.FC<Props> = ({ brand, onClick }) => {
       id={brand.id}
       border="none"
       shadow="none"
-      transform="auto"
-      transition="all"
       _hover={{ bgColor: "tint.500" }}
+      role="group"
+      transition="all 0.2s ease-in-out"
     >
       <CardBody p="0">
         <Box overflow="hidden">
-          <Box _hover={{ transform: "scale(105%)" }}>
+          <Box
+            _groupHover={{ transform: "scale(105%)" }}
+            transition="all 0.2s ease-in-out"
+          >
             <Image
               objectFit="cover"
               src={`/image/Brand/${brand.title}/logo.png`}
