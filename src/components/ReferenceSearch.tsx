@@ -23,6 +23,8 @@ import DictionaryCard from "./DictionaryCard";
 import DictionaryModal from "./DictionaryModal";
 import { Brand, Filter } from "../types";
 import FindMoreBtn from "./FindMoreBtn";
+import { getBrands } from "../util/getBrands";
+import { getFilters } from "../util/getFilters";
 
 const rows = 3;
 
@@ -42,24 +44,11 @@ const ReferenceSearch = () => {
   };
 
   useEffect(() => {
-    fetch("/data/filter.json", {
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    }).then((res) => res.json().then((json) => setMenuItem(json.filter)));
+    getFilters().then((res) => setMenuItem(res));
   }, []);
 
   useEffect(() => {
-    fetch(`/data/brand.json`, {
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    }).then((res) => {
-      if (!res.ok) return;
-      res.json().then((json) => setBrands(json.brand));
-    });
+    getBrands().then((res) => setBrands(res));
   }, []);
 
   return (

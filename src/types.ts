@@ -9,3 +9,11 @@ export type Filter = {
   type: string;
   options: string[];
 };
+
+export type TBook = {
+  id: string;
+  category: string;
+  title: string;
+  content: string;
+  image: string;
+};

@@ -1,8 +1,20 @@
-import { Card } from "@chakra-ui/react";
+import { Card, CardBody, CardHeader, Text } from "@chakra-ui/react";
 import React from "react";
+import { TBook } from "../types";
 
-const BookCard = () => {
-  return <Card>BookCard</Card>;
+type Props = {
+  book: TBook;
+};
+
+const BookCard: React.FC<Props> = ({ book }) => {
+  return (
+    <Card w="100%">
+      <CardHeader>{book.title}</CardHeader>
+      <CardBody>
+        <Text>{book.category}</Text>
+      </CardBody>
+    </Card>
+  );
 };
 
 export default BookCard;

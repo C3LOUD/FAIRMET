@@ -1,33 +1,17 @@
 import { Box, GridItem, Image, Text } from "@chakra-ui/react";
-import { faker } from "@faker-js/faker";
 import { useEffect, useState } from "react";
+import { TBook } from "../types";
+import { getBooks } from "../util/getBooks";
 import Carousel from "./Carousel";
-
-type HeroCard = {
-  id: string;
-  title: string;
-  content: string;
-  image: string;
-};
 
 const cardLength = 10;
 
 const Hero = () => {
-  const [heroCardList, setHeroCardList] = useState<HeroCard[]>([]);
+  const [heroCardList, setHeroCardList] = useState<TBook[]>([]);
   const [imageLoading, setImageLoading] = useState<boolean[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   useEffect(() => {
-    const res = new Array(cardLength).fill(null).map((_, i) => ({
-      id: faker.string.uuid(),
-      title: faker.lorem.lines({ min: 1, max: 1 }),
-      content: faker.lorem.paragraph(),
-      image: faker.image.url({
-        height: i % 2 === 0 ? 480 : 640,
-        width: i % 2 === 0 ? 640 : 480,
-      }),
-    }));
-
-    setHeroCardList(res);
+    getBooks({ limit: cardLength }).then((res) => setHeroCardList(res));
   }, []);
 
   useEffect(() => {
