@@ -1,4 +1,4 @@
-import { GridItem, Image, Text } from "@chakra-ui/react";
+import { Card, GridItem, Image, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { Brand } from "../types";
 import { getBrands } from "../util/getBrands";
@@ -23,44 +23,30 @@ const BrandCarousel = () => {
   return brands.length ? (
     <Carousel isReady={!isLoading}>
       {brands.map((brand, i) => (
-        <GridItem
-          key={brand.id}
-          position="relative"
-          h="100%"
-          minW="max-content"
-        >
-          <Image
-            src={`/image/Brand/${brand.title}/${brand.title}_1.jpg`}
-            alt={brand.title}
-            h="36rem"
-            objectFit="cover"
-            onLoadStart={() => {
-              setImageLoading((prev) => {
-                const newArr = [...prev];
-                newArr[i] = true;
-                return newArr;
-              });
-            }}
-            onLoad={() => {
-              setImageLoading((prev) => {
-                const newArr = [...prev];
-                newArr[i] = false;
-                return newArr;
-              });
-            }}
-          />
-          <Text
-            bg="white"
-            position="absolute"
-            bottom="5"
-            left="50%"
-            transform="auto"
-            translateX="-50%"
-            w="100%"
-            maxW="80%"
-          >
-            {brand.title}
-          </Text>
+        <GridItem key={brand.id} h="100%" minW="max-content">
+          <Card border="none" boxShadow="none">
+            <Image
+              src={`/image/Brand/${brand.title}/${brand.title}_1.jpg`}
+              alt={brand.title}
+              w="12rem"
+              objectFit="cover"
+              onLoadStart={() => {
+                setImageLoading((prev) => {
+                  const newArr = [...prev];
+                  newArr[i] = true;
+                  return newArr;
+                });
+              }}
+              onLoad={() => {
+                setImageLoading((prev) => {
+                  const newArr = [...prev];
+                  newArr[i] = false;
+                  return newArr;
+                });
+              }}
+            />
+            <Text>{brand.title}</Text>
+          </Card>
         </GridItem>
       ))}
     </Carousel>

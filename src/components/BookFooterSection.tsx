@@ -4,6 +4,7 @@ import { getBooks } from "../util/getBooks";
 import BookList from "./BookList";
 import Pagination from "./Pagination";
 import ThinContainer from "./ThinContainer";
+import { Box } from "@chakra-ui/react";
 
 type Props = {};
 
@@ -33,6 +34,7 @@ const BookFooterSection = (props: Props) => {
           total={totalPage}
         />
       </BookList>
+      <Box h="2rem" />
     </ThinContainer>
   );
 };

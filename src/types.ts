@@ -1,6 +1,17 @@
 export type Brand = {
   id: string;
   title: string;
+  tags: {
+    Sort: string[];
+    "Style, Occasion & Dressing Type": string[];
+    Field: string[];
+    "Item & Category": string[];
+    "Specific Item": string[];
+    "Function & Activity": string[];
+    "Country & Region": string[];
+    Price: string[];
+    Gender: string[];
+  };
   content: string;
 };
 

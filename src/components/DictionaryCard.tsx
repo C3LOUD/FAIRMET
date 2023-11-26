@@ -16,6 +16,7 @@ const DictionaryCard: React.FC<Props> = ({ brand, onClick }) => {
       id={brand.id}
       border="none"
       shadow="none"
+      rounded="none"
       _hover={{ bgColor: "tint.500" }}
       role="group"
       transition="all 0.2s ease-in-out"

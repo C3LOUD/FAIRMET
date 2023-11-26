@@ -9,11 +9,16 @@ import ReferenceSearch from "../components/ReferenceSearch";
 const Landing = () => {
   return (
     <Container px="0" maxW="100%">
-      <Box as="section" id="hero" w="100%">
+      <Box as="section" id="hero" w="100%" mb="5rem">
         <HeroCarousel />
       </Box>
-      <ReferenceSearch />
-      <Box as="section" id="book">
+      <Box as="section" id="reference-search" mb="8rem">
+        <Heading mb="2rem">
+          {"Reference Search \u3010Collection コレクション\u3011"}
+        </Heading>
+        <ReferenceSearch />
+      </Box>
+      <Box as="section" id="book" mb="5rem">
         <Heading borderBottom="2px" mb="2rem">
           {"Book 記事一覧 \uFF08TOP: Colume, Book, News\uFF09"}
         </Heading>
@@ -26,9 +31,13 @@ const Landing = () => {
           HIGHLIGHTS
         </Text>
         <BookCarousel />
+        <Box h="3rem" />
         <BookSection />
-        <Heading borderBottom="2px">{"Brand コレクション"}</Heading>
+        <Box h="3rem" />
+        <Heading>{"Brand コレクション"}</Heading>
+        <Box h="1rem" />
         <BrandCarousel />
+        <Box h="3rem" />
         <BookFooterSection />
       </Box>
     </Container>

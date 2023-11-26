@@ -23,10 +23,18 @@ const BookSection = () => {
 
   return (
     <ThinContainer>
-      <Text w="100%" textAlign="center" bgColor="white">
+      <Text
+        w="100%"
+        textAlign="center"
+        bgColor="white"
+        fontStyle="italic"
+        fontSize={20}
+        pb="1rem"
+      >
         {"Discover \u0026 Share More with You"}
       </Text>
       <HStack
+        pt="1rem"
         display="flex"
         borderBottom="1px"
         borderBottomStyle="solid"
