@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import BookList from "./BookList";
+import { useEffect, useState } from "react";
 import { TBook } from "../types";
-import Pagination from "./Pagination";
 import { getBooks } from "../util/getBooks";
+import BookList from "./BookList";
+import Pagination from "./Pagination";
 import ThinContainer from "./ThinContainer";
 
 type Props = {};

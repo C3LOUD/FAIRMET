@@ -2,7 +2,11 @@ import { Box, Button } from "@chakra-ui/react";
 import { FaChevronRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-const FindMoreBtn = () => {
+type Props = {
+  to: string;
+};
+
+const FindMoreBtn: React.FC<Props> = ({ to }) => {
   return (
     <Button
       variant="link"
@@ -17,7 +21,7 @@ const FindMoreBtn = () => {
       _hover={{ textColor: "gray.600" }}
     >
       <Box position="relative">
-        <Link to="/dictionary">{"Find More \uFF08Seek your air\uFF09"}</Link>
+        <Link to={to}>{"Find More \uFF08Seek your air\uFF09"}</Link>
         <Box
           position="absolute"
           right="0"

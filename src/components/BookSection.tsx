@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { TBook } from "../types";
 import { getBooks } from "../util/getBooks";
 import BookList from "./BookList";
+import FindMoreBtn from "./FindMoreBtn";
 import ThinContainer from "./ThinContainer";
 
 const bookFilter = ["ALL", "PICK", "WEAR", "STYLE", "OTHER"];
@@ -22,7 +23,7 @@ const BookSection = () => {
 
   return (
     <ThinContainer>
-      <Text w="100%" textAlign="center">
+      <Text w="100%" textAlign="center" bgColor="white">
         {"Discover \u0026 Share More with You"}
       </Text>
       <HStack
@@ -30,6 +31,7 @@ const BookSection = () => {
         borderBottom="1px"
         borderBottomStyle="solid"
         borderBottomColor="shade.500"
+        bgColor="tint.500"
       >
         {bookFilter.map((filter, i) => (
           <Button
@@ -57,7 +59,7 @@ const BookSection = () => {
         ))}
       </HStack>
       <BookList books={books}>
-        {limit < totalLimit && books.length <= limit && (
+        {limit < totalLimit && books.length <= limit ? (
           <Button
             variant="outline"
             type="button"
@@ -68,6 +70,8 @@ const BookSection = () => {
           >
             {"View More"}
           </Button>
+        ) : (
+          <FindMoreBtn to={`/book#${active}`} />
         )}
       </BookList>
     </ThinContainer>

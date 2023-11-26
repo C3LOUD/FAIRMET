@@ -28,7 +28,10 @@ export const getBooks = async ({
       skipCount++;
       continue;
     }
-    book.image = faker.image.url();
+    book.image = faker.image.url({
+      width: 640,
+      height: 480,
+    });
     books.push(book);
   }
 

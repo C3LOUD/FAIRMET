@@ -22,12 +22,7 @@ const HeroCarousel = () => {
   return (
     <Carousel isReady={!isLoading} showProgressBar>
       {heroCardList.map((heroCard, i) => (
-        <GridItem
-          key={heroCard.id}
-          position="relative"
-          h="100%"
-          minW="max-content"
-        >
+        <GridItem key={i} position="relative" h="100%" minW="max-content">
           <Image
             src={heroCard.image}
             alt={heroCard.title}

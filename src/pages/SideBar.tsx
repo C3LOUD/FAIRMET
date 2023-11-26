@@ -90,23 +90,23 @@ const SideBar = () => {
           <AccordionPanel pb={4}>
             <VStack alignItems="start">
               <SideBarItem
-                direct="/book/#all"
+                direct="/book/#ALL"
                 text={"All \u3010CATEGORY\u3011"}
               />
               <SideBarItem
-                direct="/book/#item"
+                direct="/book/#ITEM"
                 text={"Buy \uFF06 Pick \u3010ITEM\u3011"}
               />
               <SideBarItem
-                direct="/book/#outfit"
+                direct="/book/#OUTFIT"
                 text={"Dress \uFF06 Wear \u3010OUTFIT\u3011"}
               />
               <SideBarItem
-                direct="/book/#beauty"
+                direct="/book/#STYLE"
                 text={"Style \uFF06 Air \u3010GROOMING \uFF06 BEAUTY \u3011"}
               />
               <SideBarItem
-                direct="/book/#lifestyle"
+                direct="/book/#OTHER"
                 text={"Other \u3010FASHION \uFF06 LIFESTYLE\u3011"}
               />
             </VStack>
