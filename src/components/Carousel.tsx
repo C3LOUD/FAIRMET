@@ -24,9 +24,13 @@ const Carousel: React.FC<PropsWithChildren<Props>> = ({
   const [showRightBtn, setShowRightBtn] = useState<boolean>(true);
   const [currentOffset, setCurrentOffset] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+
   const ref = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
+  const scrollLeft = useRef<number | null>(null);
+  const startX = useRef<number | null>(null);
+  const isDown = useRef<boolean>(false);
 
   const onScrollHandler = () => {
     if (
@@ -64,6 +68,44 @@ const Carousel: React.FC<PropsWithChildren<Props>> = ({
         ref.current?.offsetWidth!) *
         100
     );
+  };
+
+  const startHandler = (e: React.MouseEvent) => {
+    isDown.current = true;
+    startX.current = e.pageX - innerRef.current?.offsetLeft!;
+    scrollLeft.current = innerRef.current!.scrollLeft;
+  };
+
+  const moveHandler = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (!isDown.current) return;
+
+    const currentX = e.pageX - innerRef.current?.offsetLeft!;
+    const walk = currentX - startX.current!;
+    innerRef.current!.scrollLeft! = scrollLeft.current! - walk;
+  };
+
+  const endHandler = (e: React.MouseEvent) => {
+    e.preventDefault();
+    isDown.current = false;
+    startX.current = null;
+
+    let elToShow = 0;
+    for (const [i, el] of [...ref.current!.children].entries()) {
+      if (
+        el.getClientRects()[0].left >
+        containerRef.current?.getClientRects()[0].x!
+      ) {
+        elToShow = i;
+        break;
+      }
+    }
+
+    const offset =
+      ref.current!.children[elToShow].getClientRects()[0].left -
+      ref.current!.children[0].getClientRects()[0].left!;
+
+    innerRef.current?.scrollTo(offset, 0);
   };
 
   const leftHandler = (e: React.MouseEvent) => {
@@ -171,6 +213,14 @@ const Carousel: React.FC<PropsWithChildren<Props>> = ({
             scrollBehavior="smooth"
             ref={innerRef}
             onScroll={onScrollHandler}
+            onMouseDown={startHandler}
+            onMouseUp={endHandler}
+            onMouseLeave={endHandler}
+            onMouseMove={moveHandler}
+            cursor={isDown.current ? "grabbing" : "grab"}
+            userSelect="none"
+            willChange="transform"
+            transition="all 0.2s"
             css={{
               "&::-webkit-scrollbar": {
                 display: "none",
