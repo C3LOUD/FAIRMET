@@ -5,6 +5,7 @@ import {
   AccordionPanel,
   Box,
   Button,
+  Flex,
   Grid,
   GridItem,
   HStack,
@@ -12,32 +13,56 @@ import {
   Spacer,
   Tag,
   Text,
+  VStack,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { Brand, Filter } from "../types";
 import { getBrands } from "../util/getBrands";
 import { getFilters } from "../util/getFilters";
 import DictionaryList from "./DictionaryList";
+import { FaChevronDown } from "react-icons/fa6";
+import FindMoreBtn from "./FindMoreBtn";
+import Pagination from "./Pagination";
 
-const tagValidator = (array1: string[], array2: string[]) => {
-  return (
-    array1.some((el) => array2.includes(el)) ||
-    array2.some((el) => array1.includes(el))
-  );
+const rows = 3;
+
+export enum PaginationType {
+  normal,
+  infinite,
+}
+
+type Props = {
+  type: PaginationType;
+  initLimit: number;
 };
 
-const ReferenceSearch = () => {
+const ReferenceSearch: React.FC<Props> = ({ type, initLimit }) => {
   const [menuItem, setMenuItem] = useState<Filter[]>([]);
   const [filter, setFilter] = useState<string[]>([]);
   const [brands, setBrands] = useState<Brand[]>([]);
+  const [limit, setLimit] = useState<number>(initLimit);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [total, setTotal] = useState<number>(1);
 
   useEffect(() => {
     getFilters().then((res) => setMenuItem(res));
   }, []);
 
   useEffect(() => {
-    getBrands({}).then((res) => setBrands(res));
-  }, []);
+    getBrands({ ...(filter.length !== 0 && { filter }) }).then((res) =>
+      setTotal(res.length)
+    );
+  }, [filter]);
+
+  useEffect(() => {
+    getBrands({
+      limit: limit * rows,
+      ...(type === PaginationType.normal && {
+        skip: (currentPage - 1) * limit * rows,
+      }),
+      ...(filter.length !== 0 && { filter }),
+    }).then((res) => setBrands(res));
+  }, [limit, currentPage, type, filter]);
 
   return (
     <>
@@ -46,6 +71,28 @@ const ReferenceSearch = () => {
           {"Seek your air, build your wardrobe \uFF06 find your lifestyle"}
         </Text>
         <Spacer />
+        {type === PaginationType.normal && (
+          <>
+            <Text>{"Limit"}</Text>
+            <Select
+              w="fit-content"
+              h="fit-content"
+              border="none"
+              defaultValue={initLimit}
+              onChange={(e) => {
+                setLimit(Number(e.target.value));
+                setCurrentPage(1);
+              }}
+            >
+              {Array.from(
+                { length: Math.ceil(total / rows) },
+                (_, index) => index + 1
+              ).map((index) => (
+                <option value={index}>{index}</option>
+              ))}
+            </Select>
+          </>
+        )}
         <Text>{"Sort by\uFF1A"}</Text>
         <Select
           w="fit-content"
@@ -169,22 +216,42 @@ const ReferenceSearch = () => {
           </Button>
         </HStack>
       )}
-      {brands.length !== 0 && (
-        <DictionaryList
-          brands={
-            filter.length !== 0
-              ? brands.filter((brand) => {
-                  return Object.keys(brand.tags).some((key) =>
-                    tagValidator(
-                      brand.tags[key as keyof typeof brand.tags],
-                      filter
-                    )
-                  );
-                })
-              : brands
-          }
-        />
-      )}
+      <Flex position="relative" alignItems="center" direction="column">
+        {brands.length !== 0 && (
+          <DictionaryList rows={rows} limit={limit} brands={brands} />
+        )}
+        {type === PaginationType.infinite &&
+          (total > brands.length ? (
+            <Button
+              variant="link"
+              position="absolute"
+              bottom="0"
+              translateY="100%"
+              left="50%"
+              translateX="-50%"
+              transform="auto"
+              _hover={{ border: "none", textColor: "gray.600" }}
+              onClick={(e: React.MouseEvent) => {
+                e.preventDefault();
+                setLimit((prev) => prev + 4);
+              }}
+            >
+              <VStack gap="0">
+                <Text>{"Seek More"}</Text>
+                <FaChevronDown />
+              </VStack>
+            </Button>
+          ) : (
+            <FindMoreBtn to="/dictionary" />
+          ))}
+        {type === PaginationType.normal && limit * rows < total && (
+          <Pagination
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            total={Math.ceil(total / (rows * limit))}
+          />
+        )}
+      </Flex>
     </>
   );
 };

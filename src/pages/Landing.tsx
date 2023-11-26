@@ -4,7 +4,8 @@ import BookFooterSection from "../components/BookFooterSection";
 import BookSection from "../components/BookSection";
 import BrandCarousel from "../components/BrandCarousel";
 import HeroCarousel from "../components/HeroCarousel";
-import ReferenceSearch from "../components/ReferenceSearch";
+import ReferenceSearch, { PaginationType } from "../components/ReferenceSearch";
+import { BookCardLayout } from "../components/BookCard";
 
 const Landing = () => {
   return (
@@ -16,7 +17,7 @@ const Landing = () => {
         <Heading mb="2rem">
           {"Reference Search \u3010Collection コレクション\u3011"}
         </Heading>
-        <ReferenceSearch />
+        <ReferenceSearch type={PaginationType.infinite} initLimit={4} />
       </Box>
       <Box as="section" id="book" mb="5rem">
         <Heading borderBottom="2px" mb="2rem">
@@ -30,7 +31,9 @@ const Landing = () => {
         >
           HIGHLIGHTS
         </Text>
-        <BookCarousel />
+        <Box bgColor="tint.500">
+          <BookCarousel type={BookCardLayout.LandscapeLeft} />
+        </Box>
         <Box h="3rem" />
         <BookSection />
         <Box h="3rem" />

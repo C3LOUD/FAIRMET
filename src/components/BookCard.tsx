@@ -6,6 +6,7 @@ export enum BookCardLayout {
   LandscapeLeft,
   LandscapeRight,
   Portrait,
+  FixWidth,
 }
 
 type Props = {
@@ -192,6 +193,50 @@ const BookCard: React.FC<Props> = ({ book, type }) => {
               >
                 {book.content}
               </Text>
+            </Flex>
+          </VStack>
+        </Card>
+      );
+    case BookCardLayout.FixWidth:
+      return (
+        <Card
+          w={`12rem`}
+          h="fit-content"
+          border="none"
+          boxShadow="none"
+          rounded="none"
+          borderBottom="solid 1px black"
+          _last={{ border: "none" }}
+          bgColor="transparent"
+        >
+          <VStack direction="column" gap="0">
+            <Image
+              src={book.image}
+              alt={book.title}
+              objectFit="contain"
+              objectPosition="center"
+              w="12rem"
+              h="100%"
+            />
+            <Flex
+              direction="column"
+              flex="1"
+              py="1rem"
+              overflow="hidden"
+              gap="0.5rem"
+            >
+              <Text
+                w="100%"
+                overflow="hidden"
+                css={{
+                  display: "-webkit-box",
+                  WebkitBoxOrient: "vertical",
+                  WebkitLineClamp: 3,
+                }}
+              >
+                {book.title}
+              </Text>
+              <Text fontSize={12}>{`\u3010${book.category}\u3011`}</Text>
             </Flex>
           </VStack>
         </Card>

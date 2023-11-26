@@ -86,6 +86,7 @@ const Carousel: React.FC<PropsWithChildren<Props>> = ({
   };
 
   const endHandler = (e: React.MouseEvent) => {
+    if (!isDown.current) return;
     e.preventDefault();
     isDown.current = false;
     startX.current = null;

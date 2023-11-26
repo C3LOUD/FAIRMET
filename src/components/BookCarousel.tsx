@@ -1,4 +1,4 @@
-import { Box, GridItem } from "@chakra-ui/react";
+import { GridItem } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { TBook } from "../types";
 import { getBooks } from "../util/getBooks";
@@ -7,7 +7,11 @@ import Carousel from "./Carousel";
 
 const cardLength = 10;
 
-const BookCarousel = () => {
+type Props = {
+  type: BookCardLayout;
+};
+
+const BookCarousel: React.FC<Props> = ({ type }) => {
   const [bookCardList, setBookCardList] = useState<TBook[]>([]);
 
   useEffect(() => {
@@ -17,15 +21,13 @@ const BookCarousel = () => {
   }, []);
 
   return (
-    <Box bgColor="tint.500">
-      <Carousel isReady>
-        {bookCardList.map((bookCard, i) => (
-          <GridItem key={i} position="relative" h="100%" minW="max-content">
-            <BookCard book={bookCard} type={BookCardLayout.LandscapeLeft} />
-          </GridItem>
-        ))}
-      </Carousel>
-    </Box>
+    <Carousel isReady>
+      {bookCardList.map((bookCard, i) => (
+        <GridItem key={i} position="relative" h="100%" minW="max-content">
+          <BookCard book={bookCard} type={type} />
+        </GridItem>
+      ))}
+    </Carousel>
   );
 };
 
