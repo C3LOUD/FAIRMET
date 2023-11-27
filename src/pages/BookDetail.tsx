@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Container,
   Flex,
   HStack,
@@ -12,9 +13,10 @@ import {
 } from "@chakra-ui/react";
 import { faker } from "@faker-js/faker";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { TBook, TagKey } from "../types";
 import { getBook } from "../util/getBook";
+import { FaArrowLeft } from "react-icons/fa6";
 
 const bookTags: TagKey[] = [
   "Style, Occasion & Dressing Type",
@@ -31,6 +33,7 @@ const BookDetail = () => {
   const [previousBook, setPreviousBook] = useState<TBook>();
   const [nextBook, setNextBook] = useState<TBook>();
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!id) return;
@@ -42,7 +45,20 @@ const BookDetail = () => {
   }, [id]);
   return (
     <Container px="0" maxW="100%" w="100%" mb="8rem">
-      <VStack borderBottom="solid 1px" mx="3rem">
+      <VStack borderBottom="solid 1px" mx="3rem" position="relative">
+        <Button
+          position="absolute"
+          bottom="0"
+          left="0"
+          transform="auto"
+          translateY="150%"
+          variant="link"
+          onClick={() => {
+            navigate("/book");
+          }}
+        >
+          <FaArrowLeft />
+        </Button>
         <Heading>{"Post"}</Heading>
         <Text>
           {"Seek your Air, Build your Wardrobe \u0026 Find your Lifestyle"}
