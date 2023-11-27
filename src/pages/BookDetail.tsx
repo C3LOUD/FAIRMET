@@ -5,6 +5,7 @@ import {
   Heading,
   Image,
   Skeleton,
+  Spacer,
   Text,
   VStack,
 } from "@chakra-ui/react";
@@ -52,38 +53,58 @@ const BookDetail = (props: Props) => {
           ))}
         </Flex>
         <Box h="3rem" />
-        <Flex h="max-content">
-          <Flex flex="1" direction="column">
-            <Image
-              flex="2"
-              flexShrink={2}
-              src={faker.image.url()}
-              maxW="100%"
-              maxH="100%"
-            />
-            <Image
-              flex="1"
-              flexShrink={1}
-              src={faker.image.url()}
-              maxW="100%"
-            />
-            <Flex flex="1" flexShrink={1}>
+        <Flex h="fit-content" gap="2rem">
+          <Flex flex="1" direction="column" gap="1rem" minH="30rem">
+            <Box flex="2 1 15rem" minH="0" minW="0">
               <Image
                 src={faker.image.url()}
                 objectFit="cover"
-                flexShrink={1}
-                flexBasis={0}
+                w="100%"
+                h="100%"
+                objectPosition="center"
               />
+            </Box>
+            <Box flex="1 1 7.5rem" minH="0" minW="0">
               <Image
                 src={faker.image.url()}
+                w="100%"
+                h="100%"
                 objectFit="cover"
-                flexShrink={1}
-                flexBasis={0}
+                objectPosition="center"
               />
+            </Box>
+            <Flex flex="1 1 7.5rem" minH="0" minW="0">
+              <Box flexBasis="50%">
+                <Image
+                  w="100%"
+                  h="100%"
+                  src={faker.image.url()}
+                  objectFit="cover"
+                  objectPosition="center"
+                />
+              </Box>
+              <Box flexBasis="50%">
+                <Image
+                  w="100%"
+                  h="100%"
+                  src={faker.image.url()}
+                  objectFit="cover"
+                  objectPosition="center"
+                />
+              </Box>
             </Flex>
           </Flex>
           <Box flex="2">
-            <Text>{book?.title}</Text>
+            <Text fontWeight={700} textColor="secondary" fontSize={20}>
+              {book?.title}
+            </Text>
+            <Box h="1rem" />
+            <Text fontSize={16}>{book?.content}</Text>
+            <Box h="3rem" />
+
+            <Flex bgColor="red">
+              <Text h="20rem">Footer</Text>
+            </Flex>
           </Box>
         </Flex>
       </Skeleton>
