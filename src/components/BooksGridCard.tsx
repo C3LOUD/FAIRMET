@@ -1,5 +1,6 @@
 import { Flex, GridItem, Image, Text } from "@chakra-ui/react";
 import { TBook } from "../types";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   book: TBook;
@@ -7,8 +8,18 @@ type Props = {
 };
 
 const BooksGridCard = ({ book, span }: Props) => {
+  const navigate = useNavigate();
+
   return (
-    <GridItem height="max-content" w="100%" gridColumn={`span ${span}`}>
+    <GridItem
+      height="max-content"
+      cursor="pointer"
+      w="100%"
+      gridColumn={`span ${span}`}
+      onClick={() => {
+        navigate(`/book/${book.id}`);
+      }}
+    >
       <Image
         src={book.image}
         alt={book.title}

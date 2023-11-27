@@ -39,3 +39,5 @@ export type TBook = {
   content: string;
   image: string;
 };
+
+export type TagKey = keyof TBook["tags"];

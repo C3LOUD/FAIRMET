@@ -39,6 +39,7 @@ const BookCard: React.FC<Props> = ({ book, type }) => {
           h={`${height}rem`}
           w={`${width}rem`}
           onMouseUpCapture={navigateHandler}
+          cursor="pointer"
         >
           <Flex gap="2rem">
             <Box flex="1" w="100%" h={`calc(${height}rem - 2 * ${padding}rem)`}>
@@ -99,6 +100,7 @@ const BookCard: React.FC<Props> = ({ book, type }) => {
           h={`${height}rem`}
           w={`${width}rem`}
           onMouseUpCapture={navigateHandler}
+          cursor="pointer"
         >
           <Flex gap="2rem">
             <Flex
@@ -159,6 +161,7 @@ const BookCard: React.FC<Props> = ({ book, type }) => {
           h="fit-content"
           bgColor="transparent"
           onMouseUpCapture={navigateHandler}
+          cursor="pointer"
         >
           <VStack gap="1rem" direction="column">
             <Box h="12rem" w="80%">
@@ -218,6 +221,7 @@ const BookCard: React.FC<Props> = ({ book, type }) => {
           _last={{ border: "none" }}
           bgColor="transparent"
           onMouseUpCapture={navigateHandler}
+          cursor="pointer"
         >
           <VStack direction="column" gap="0">
             <Image
