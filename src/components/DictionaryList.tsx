@@ -21,6 +21,18 @@ const DictionaryList = ({ brands, limit, rows }: Props) => {
     onOpen();
   };
 
+  const nextHandler = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const activeId = brands.findIndex((el) => el.id === activeBrand?.id);
+    setActiveBrand(brands[activeId + 1]);
+  };
+
+  const previousHandler = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const activeId = brands.findIndex((el) => el.id === activeBrand?.id);
+    setActiveBrand(brands[activeId - 1]);
+  };
+
   return (
     <Flex w="100%" gap="3rem" px="3rem" wrap="wrap" pb="3rem">
       {activeBrand && (
@@ -28,6 +40,8 @@ const DictionaryList = ({ brands, limit, rows }: Props) => {
           isOpen={isOpen}
           onClose={onClose}
           brand={activeBrand}
+          nextHandler={nextHandler}
+          previousHandler={previousHandler}
         />
       )}
       {[...new Array(rows)].map((_, index) => (

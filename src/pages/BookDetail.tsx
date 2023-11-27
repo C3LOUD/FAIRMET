@@ -13,10 +13,8 @@ import {
 import { faker } from "@faker-js/faker";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { TBook } from "../types";
+import { TBook, TagKey } from "../types";
 import { getBook } from "../util/getBook";
-
-type TagKey = keyof TBook["tags"];
 
 const bookTags: TagKey[] = [
   "Style, Occasion & Dressing Type",
