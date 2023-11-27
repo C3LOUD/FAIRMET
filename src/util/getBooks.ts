@@ -26,7 +26,7 @@ export const getBooks = async ({
   for (const book of json.books) {
     if (limit && books.length >= limit) break;
     if (category && category !== "ALL" && category !== book.category) continue;
-    if (tag && !book.tags.includes(tag)) continue;
+    if (tag && !book.tags["Item & Category"].includes(tag)) continue;
     if (skip && skipCount < skip) {
       skipCount++;
       continue;

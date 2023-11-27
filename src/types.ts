@@ -24,7 +24,17 @@ export type Filter = {
 export type TBook = {
   id: string;
   category: string;
-  tags: string[];
+  tags: {
+    Sort: string[];
+    "Style, Occasion & Dressing Type": string[];
+    Field: string[];
+    "Item & Category": string[];
+    "Specific Item": string[];
+    "Function & Activity": string[];
+    "Country & Region": string[];
+    Price: string[];
+    Gender: string[];
+  };
   title: string;
   content: string;
   image: string;

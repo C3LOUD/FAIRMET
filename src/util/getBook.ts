@@ -5,7 +5,9 @@ type Args = {
   id: string;
 };
 
-export const getBook = async ({ id }: Args): Promise<TBook> => {
+export const getBook = async ({
+  id,
+}: Args): Promise<{ book: TBook; next: TBook; previous: TBook }> => {
   const res = await fetch("/data/book.json", {
     headers: {
       "Content-Type": "application/json",
@@ -13,7 +15,14 @@ export const getBook = async ({ id }: Args): Promise<TBook> => {
     },
   });
   const json = await res.json();
-  const book = json.books.find((el: TBook) => el.id === id);
-  book.image = faker.image.url();
-  return book;
+  const bookIndex = json.books.findIndex((el: TBook) => id === el.id);
+  json.books[bookIndex].image = faker.image.url();
+  const nextIndex = bookIndex === json.books.length - 1 ? 0 : bookIndex;
+  const previousIndex = bookIndex === 0 ? json.books.length - 1 : bookIndex;
+
+  return {
+    book: json.books[bookIndex],
+    next: json.books[nextIndex],
+    previous: json.books[previousIndex],
+  };
 };
