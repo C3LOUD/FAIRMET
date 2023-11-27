@@ -1,11 +1,11 @@
 import { Box, Container, Heading, Text } from "@chakra-ui/react";
+import { BookCardLayout } from "../components/BookCard";
 import BookCarousel from "../components/BookCarousel";
 import BookFooterSection from "../components/BookFooterSection";
 import BookSection from "../components/BookSection";
 import BrandCarousel from "../components/BrandCarousel";
 import HeroCarousel from "../components/HeroCarousel";
 import ReferenceSearch, { PaginationType } from "../components/ReferenceSearch";
-import { BookCardLayout } from "../components/BookCard";
 
 const Landing = () => {
   return (
@@ -36,7 +36,7 @@ const Landing = () => {
         </Box>
         <Box h="3rem" />
         <BookSection />
-        <Box h="3rem" />
+        <Box h="5rem" />
         <Heading>{"Brand コレクション"}</Heading>
         <Box h="1rem" />
         <BrandCarousel />

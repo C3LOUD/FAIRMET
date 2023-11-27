@@ -1,18 +1,20 @@
-import { Button, HStack, Text } from "@chakra-ui/react";
+import { Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { TBook } from "../types";
 import { getBooks } from "../util/getBooks";
+import BookFilter from "./BookFilter";
 import BookList from "./BookList";
 import FindMoreBtn from "./FindMoreBtn";
 import ThinContainer from "./ThinContainer";
+import ViewMoreBtn from "./ViewMoreBtn";
 
-const bookFilter = ["ALL", "PICK", "WEAR", "STYLE", "OTHER"];
 const totalLimit = 7;
 const moreCount = 3;
+const initLimit = 4;
 
 const BookSection = () => {
   const [books, setBooks] = useState<TBook[]>([]);
-  const [limit, setLimit] = useState<number>(4);
+  const [limit, setLimit] = useState<number>(initLimit);
   const [active, setActive] = useState<string>("ALL");
 
   useEffect(() => {
@@ -33,51 +35,21 @@ const BookSection = () => {
       >
         {"Discover \u0026 Share More with You"}
       </Text>
-      <HStack
-        pt="1rem"
-        display="flex"
-        borderBottom="1px"
-        borderBottomStyle="solid"
-        borderBottomColor="shade.500"
-        bgColor="tint.500"
-      >
-        {bookFilter.map((filter, i) => (
-          <Button
-            fontSize={active === filter ? 28 : 20}
-            _hover={{
-              border: "none",
-              fontSize: active === filter ? 28 : 24,
-            }}
-            transition="all 0.2s ease-in-out"
-            h="2rem"
-            variant="link"
-            flex="1"
-            key={i}
-            type="button"
-            fontWeight="400"
-            fontStyle="italic"
-            onClick={(e) => {
-              e.preventDefault();
-              setActive(filter);
-              setLimit(4);
-            }}
-          >
-            {filter}
-          </Button>
-        ))}
-      </HStack>
+      <BookFilter
+        active={active}
+        setActive={setActive}
+        resetState={() => {
+          setLimit(initLimit);
+        }}
+      />
       <BookList books={books}>
         {limit < totalLimit && books.length <= limit ? (
-          <Button
-            variant="outline"
-            type="button"
+          <ViewMoreBtn
             onClick={(e) => {
               e.preventDefault();
               setLimit((prev) => prev + moreCount);
             }}
-          >
-            {"View More"}
-          </Button>
+          />
         ) : (
           <FindMoreBtn to={`/book#${active}`} />
         )}

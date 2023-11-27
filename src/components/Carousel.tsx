@@ -31,6 +31,7 @@ const Carousel: React.FC<PropsWithChildren<Props>> = ({
   const scrollLeft = useRef<number | null>(null);
   const startX = useRef<number | null>(null);
   const isDown = useRef<boolean>(false);
+  const isDrag = useRef<boolean>(false);
 
   const onScrollHandler = () => {
     if (
@@ -71,6 +72,7 @@ const Carousel: React.FC<PropsWithChildren<Props>> = ({
   };
 
   const startHandler = (e: React.MouseEvent) => {
+    e.stopPropagation();
     isDown.current = true;
     startX.current = e.pageX - innerRef.current?.offsetLeft!;
     scrollLeft.current = innerRef.current!.scrollLeft;
@@ -79,7 +81,7 @@ const Carousel: React.FC<PropsWithChildren<Props>> = ({
   const moveHandler = (e: React.MouseEvent) => {
     e.preventDefault();
     if (!isDown.current) return;
-
+    isDrag.current = true;
     const currentX = e.pageX - innerRef.current?.offsetLeft!;
     const walk = currentX - startX.current!;
     innerRef.current!.scrollLeft! = scrollLeft.current! - walk;
@@ -87,7 +89,9 @@ const Carousel: React.FC<PropsWithChildren<Props>> = ({
 
   const endHandler = (e: React.MouseEvent) => {
     if (!isDown.current) return;
+    if (isDrag.current) e.stopPropagation();
     e.preventDefault();
+    isDrag.current = false;
     isDown.current = false;
     startX.current = null;
 
@@ -214,8 +218,8 @@ const Carousel: React.FC<PropsWithChildren<Props>> = ({
             scrollBehavior="smooth"
             ref={innerRef}
             onScroll={onScrollHandler}
-            onMouseDown={startHandler}
-            onMouseUp={endHandler}
+            onMouseDownCapture={startHandler}
+            onMouseUpCapture={endHandler}
             onMouseLeave={endHandler}
             onMouseMove={moveHandler}
             cursor={isDown.current ? "grabbing" : "grab"}

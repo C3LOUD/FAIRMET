@@ -5,12 +5,14 @@ type Args = {
   limit?: number;
   category?: string;
   skip?: number;
+  tag?: string;
 };
 
 export const getBooks = async ({
   limit,
   category,
   skip,
+  tag,
 }: Args): Promise<TBook[]> => {
   const res = await fetch("/data/book.json", {
     headers: {
@@ -24,6 +26,7 @@ export const getBooks = async ({
   for (const book of json.books) {
     if (limit && books.length >= limit) break;
     if (category && category !== "ALL" && category !== book.category) continue;
+    if (tag && !book.tags.includes(tag)) continue;
     if (skip && skipCount < skip) {
       skipCount++;
       continue;

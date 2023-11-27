@@ -1,6 +1,7 @@
 import { Box, Card, Flex, Image, Text, VStack } from "@chakra-ui/react";
 import React from "react";
 import { TBook } from "../types";
+import { useNavigate } from "react-router-dom";
 
 export enum BookCardLayout {
   LandscapeLeft,
@@ -19,6 +20,11 @@ const width = 36;
 const padding = 1;
 
 const BookCard: React.FC<Props> = ({ book, type }) => {
+  const navigate = useNavigate();
+  const navigateHandler = (e: React.MouseEvent) => {
+    navigate(`/book/${book.id}`);
+  };
+
   switch (type) {
     case BookCardLayout.LandscapeLeft:
       return (
@@ -32,6 +38,7 @@ const BookCard: React.FC<Props> = ({ book, type }) => {
           _last={{ border: "none" }}
           h={`${height}rem`}
           w={`${width}rem`}
+          onMouseUpCapture={navigateHandler}
         >
           <Flex gap="2rem">
             <Box flex="1" w="100%" h={`calc(${height}rem - 2 * ${padding}rem)`}>
@@ -91,6 +98,7 @@ const BookCard: React.FC<Props> = ({ book, type }) => {
           _last={{ border: "none" }}
           h={`${height}rem`}
           w={`${width}rem`}
+          onMouseUpCapture={navigateHandler}
         >
           <Flex gap="2rem">
             <Flex
@@ -150,6 +158,7 @@ const BookCard: React.FC<Props> = ({ book, type }) => {
           _last={{ border: "none" }}
           h="fit-content"
           bgColor="transparent"
+          onMouseUpCapture={navigateHandler}
         >
           <VStack gap="1rem" direction="column">
             <Box h="12rem" w="80%">
@@ -208,6 +217,7 @@ const BookCard: React.FC<Props> = ({ book, type }) => {
           borderBottom="solid 1px black"
           _last={{ border: "none" }}
           bgColor="transparent"
+          onMouseUpCapture={navigateHandler}
         >
           <VStack direction="column" gap="0">
             <Image

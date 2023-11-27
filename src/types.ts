@@ -24,6 +24,7 @@ export type Filter = {
 export type TBook = {
   id: string;
   category: string;
+  tags: string[];
   title: string;
   content: string;
   image: string;
