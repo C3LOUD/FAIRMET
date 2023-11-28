@@ -39,7 +39,8 @@ const SideBar = () => {
 			top="0"
 			left="0"
 			gap="1rem"
-			minH="100vh"
+			minH={{ base: 'max-content', md: '100vh' }}
+			h={{ base: '100%', md: '100vh' }}
 		>
 			<Link to="/" reloadDocument>
 				<Image
@@ -132,23 +133,33 @@ const SideBar = () => {
 
 			<Spacer />
 
-			<HStack p={4}>
-				<IconButton
-					isRound
-					bgColor="transparent"
-					aria-label="Direct to Pinterest"
-					fontSize="1.5rem"
-					icon={<FaPinterest />}
-				/>
-				<IconButton
-					isRound
-					bgColor="transparent"
-					aria-label="Direct to Instagram"
-					fontSize="1.5rem"
-					icon={<FaInstagram />}
-				/>
+			<HStack p={4} flexDirection={{ base: 'column-reverse', md: 'row' }}>
+				<Flex>
+					<IconButton
+						isRound
+						bgColor="transparent"
+						aria-label="Direct to Pinterest"
+						fontSize="1.5rem"
+						icon={<FaPinterest />}
+					/>
+					<IconButton
+						isRound
+						bgColor="transparent"
+						aria-label="Direct to Instagram"
+						fontSize="1.5rem"
+						icon={<FaInstagram />}
+					/>
+				</Flex>
 				<Spacer />
-				<Text>English</Text>
+				<Flex
+					w="100%"
+					justifyContent={{ base: 'space-between', md: 'end' }}
+					fontWeight="bold"
+					fontSize="1.25rem"
+				>
+					<Text display={{ base: 'block', md: 'none' }}>Luggage</Text>
+					<Text>English</Text>
+				</Flex>
 			</HStack>
 		</Flex>
 	);

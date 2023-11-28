@@ -7,7 +7,7 @@ import {
 	Stack,
 	StackDivider,
 } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import React from 'react';
 import { Brand } from '../types';
 
 type Props = {
@@ -16,24 +16,20 @@ type Props = {
 };
 
 const DictionaryCard: React.FC<Props> = ({ brand, viewDetail }) => {
-	const [isShow, setIsShow] = useState<boolean>(false);
-	const toggleDetail = () => setIsShow(!isShow);
 	return (
 		<Card
+			id={brand.id}
+			as="button"
+			cursor="pointer"
 			border="none"
 			shadow="none"
 			rounded="none"
 			role="group"
 			transition="all 0.3s ease"
+			onClick={viewDetail}
 		>
 			<CardBody p="0" position="relative" overflow="hidden">
-				<Box
-					cursor="pointer"
-					overflow="hidden"
-					position="relative"
-					zIndex="5"
-					onClick={toggleDetail}
-				>
+				<Box cursor="pointer" overflow="hidden" position="relative" zIndex="5">
 					<Box
 						_groupHover={{ transform: 'scale(105%)' }}
 						transition="all 0.3s ease"
@@ -53,12 +49,13 @@ const DictionaryCard: React.FC<Props> = ({ brand, viewDetail }) => {
 						w="100%"
 						h="100%"
 						p="4"
-						transform={`${isShow ? 'translateY(-100%)' : 'translateY(0)'}`}
+						_groupHover={{ transform: 'translateY(-100%)' }}
 					>
 						<Text
 							color="primary"
 							fontWeight="bold"
 							fontStyle="italic"
+							fontSize="1.25rem"
 							w="100%"
 							h="100%"
 							overflow="hidden"
@@ -77,15 +74,20 @@ const DictionaryCard: React.FC<Props> = ({ brand, viewDetail }) => {
 					{brand.title}
 				</Text>
 				<Box
-					borderWidth={`${isShow ? '1px 0px' : '0px'}`}
+					borderWidth="0px"
 					borderColor="gray"
 					position="relative"
-					height={`${isShow ? 'max-content' : '0'}`}
+					height="0"
 					transition="all 0.3s ease"
-					transform={`${isShow ? 'translateY(0%)' : 'translateY(-100%)'}`}
+					transform="translateY(-100%)"
 					zIndex="1"
 					px="4"
-					py={`${isShow ? '4' : '0'}`}
+					py="0"
+					_groupHover={{
+						transform: 'translateY(0%)',
+						height: 'max-content',
+						borderWidth: '1px 0px',
+					}}
 				>
 					<Stack divider={<StackDivider borderColor="shade.900" />} spacing="1">
 						{Object.values(brand.tags)?.map((el, i) => {
@@ -98,21 +100,6 @@ const DictionaryCard: React.FC<Props> = ({ brand, viewDetail }) => {
 							);
 						})}
 					</Stack>
-					<Text
-						id={brand.id}
-						fontSize="14"
-						align="right"
-						position="absolute"
-						right="0"
-						bottom="0"
-						fontStyle="italic"
-						_hover={{ fontWeight: 'bold' }}
-						cursor="pointer"
-						display={`${isShow ? 'block' : 'none'}`}
-						onClick={viewDetail}
-					>
-						View More
-					</Text>
 				</Box>
 			</CardBody>
 		</Card>

@@ -1,29 +1,30 @@
-import { Box, Container, Flex, HStack, Image, Text } from '@chakra-ui/react';
-import React from 'react';
-import { Outlet } from 'react-router-dom';
-import SideBar from './SideBar';
+import { Box, Container, Flex, HStack, Text } from '@chakra-ui/react';
 import { RiCopyrightLine } from 'react-icons/ri';
+import { Outlet } from 'react-router-dom';
+import MobileFooter from '../components/MobileFooter';
 import ScrollToHashElement from '../components/ScrollToHashElement';
+import SideBar from './SideBar';
 
 const RootLayout = () => {
 	return (
-		<Box bgColor="primary" textColor="secondary" minH="100vh">
-			<Container as="main" maxW={{ base: '48rem', md: '64rem', lg: '90rem' }} bgColor="white">
+		<Box bgColor="primary" textColor="secondary" minH="100vh" pos="relative">
+			<Container
+				as="main"
+				px={{ base: 0, md: '1rem' }}
+				mb={{ base: '4rem', md: 0 }}
+				maxW={{ base: '48rem', md: '64rem', lg: '90rem' }}
+				bgColor="white"
+			>
 				<ScrollToHashElement />
 				<Flex w="100%" justifyContent="center" gap={2}>
 					<Box w="20%" display={{ base: 'none', md: 'block' }}>
 						<SideBar />
 					</Box>
-					<Flex flexDirection="column" px="0" w={{ base: '100%', md: '80%' }}>
-						<Image
-							src="/image/logo.svg"
-							alt="logo"
-							objectFit="contain"
-							h="5rem"
-							px={8}
-							w="100%"
-							align={{ base: 'left', md: 'center' }}
-						/>
+					<Flex
+						flexDirection="column"
+						px={{ base: '1rem', md: 0 }}
+						w={{ base: '100%', md: '80%' }}
+					>
 						<Outlet />
 						<HStack alignSelf="center" w="fit-content">
 							<Text>{'Copyright'}</Text>
@@ -33,6 +34,7 @@ const RootLayout = () => {
 					</Flex>
 				</Flex>
 			</Container>
+			<MobileFooter />
 		</Box>
 	);
 };
