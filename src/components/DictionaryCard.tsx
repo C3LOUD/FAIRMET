@@ -48,12 +48,24 @@ const DictionaryCard: React.FC<Props> = ({ brand, viewDetail }) => {
 						position="absolute"
 						transition="all 0.3s ease"
 						zIndex="10"
-						bgColor="shade.500"
+						bgColor="shade.alpha"
 						bottom="-100%"
 						w="100%"
 						h="100%"
+						p="4"
 						transform={`${isShow ? 'translateY(-100%)' : 'translateY(0)'}`}
-					></Box>
+					>
+						<Text
+							color="primary"
+							fontWeight="bold"
+							fontStyle="italic"
+							w="100%"
+							h="100%"
+							overflow="hidden"
+						>
+							{brand.content}
+						</Text>
+					</Box>
 				</Box>
 				<Text
 					position="relative"
@@ -76,21 +88,15 @@ const DictionaryCard: React.FC<Props> = ({ brand, viewDetail }) => {
 					py={`${isShow ? '4' : '0'}`}
 				>
 					<Stack divider={<StackDivider borderColor="shade.900" />} spacing="1">
-						<Box>
-							<Text p="2" fontSize="14" align="left">
-								Bags, Watches, Nail Tools
-							</Text>
-						</Box>
-						<Box>
-							<Text p="2" fontSize="14" align="left">
-								South Korea, United Kingdom, Germany
-							</Text>
-						</Box>
-						<Box>
-							<Text p="2" fontSize="14" align="left">
-								Hers, I don't care
-							</Text>
-						</Box>
+						{Object.values(brand.tags)?.map((el, i) => {
+							return (
+								<Box key={i}>
+									<Text p="2" fontSize="14" align="left">
+										{el.join(', ')}
+									</Text>
+								</Box>
+							);
+						})}
 					</Stack>
 					<Text
 						id={brand.id}

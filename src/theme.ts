@@ -27,6 +27,7 @@ export const theme = extendTheme({
 			800: '#2C2D2F',
 			900: '#161618',
 			950: '#0C0C0D',
+			alpha: '#0C0C0Dcc',
 		},
 		tint: {
 			50: '#E8E3E3',

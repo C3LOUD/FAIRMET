@@ -15,9 +15,24 @@ const SideBarItem: React.FC<Props> = ({ direct, text }) => {
 			textAlign="left"
 			w="100%"
 			_hover={{ textDecoration: 'underline' }}
-			textColor={direct === pathname + hash ? 'active' : ''}
 			fontWeight={direct === pathname + hash ? '500' : '400'}
+			pos="relative"
 		>
+			{direct === pathname + hash ? (
+				<Box
+					w="2"
+					h="2"
+					bgColor="black"
+					rounded="50%"
+					pos="absolute"
+					left="-1rem"
+					top="50%"
+					transform="translateY(-50%)"
+				></Box>
+			) : (
+				<></>
+			)}
+
 			<Link to={direct}>{text}</Link>
 		</Box>
 	);
