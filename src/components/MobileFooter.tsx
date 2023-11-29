@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react';
 import SideBar from '../pages/SideBar';
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 
 type Props = {};
 
@@ -56,7 +56,7 @@ const MobileFooter: React.FC<Props> = () => {
 					borderTop={`${footerActive === '/' ? '2px solid white' : ''}`}
 					p="2"
 				>
-					Home
+					<Link to={'/'}>{'Home'}</Link>
 				</Box>
 				<Box
 					fontStyle="italic"
@@ -65,14 +65,14 @@ const MobileFooter: React.FC<Props> = () => {
 					}`}
 					p="2"
 				>
-					Dictionary
+					<Link to={'/dictionary'}>{'Dictionary'}</Link>
 				</Box>
 				<Box
 					fontStyle="italic"
 					borderTop={`${footerActive === '/book' ? '2px solid white' : ''}`}
 					p="2"
 				>
-					Book
+					<Link to={'/book'}>{'Book'}</Link>
 				</Box>
 				<Box fontStyle="italic" onClick={onOpen} cursor="pointer" py="2">
 					MENU

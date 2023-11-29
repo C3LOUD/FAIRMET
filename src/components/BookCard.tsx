@@ -37,7 +37,8 @@ const BookCard: React.FC<Props> = ({ book, type }) => {
 					bgColor="transparent"
 					_last={{ border: 'none' }}
 					h={`${height}rem`}
-					w={{ base: '100%', md: `${width}rem` }}
+					w="100%"
+					maxW={`${width}rem`}
 					onMouseUpCapture={navigateHandler}
 					cursor="pointer"
 				>
@@ -152,7 +153,8 @@ const BookCard: React.FC<Props> = ({ book, type }) => {
 			return (
 				<Card
 					p={`${padding}rem`}
-					w={{ base: '100%', md: `${width}rem` }}
+					w="100%"
+					maxW={`${width}rem`}
 					border="none"
 					boxShadow="none"
 					rounded="none"
