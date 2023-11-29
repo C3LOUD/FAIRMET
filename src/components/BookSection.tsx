@@ -8,7 +8,7 @@ import FindMoreBtn from "./FindMoreBtn";
 import ThinContainer from "./ThinContainer";
 import ViewMoreBtn from "./ViewMoreBtn";
 
-const totalLimit = 7;
+const totalLimit = 20;
 const moreCount = 3;
 const initLimit = 4;
 

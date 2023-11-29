@@ -236,7 +236,6 @@ const Carousel: React.FC<PropsWithChildren<Props>> = ({
               ref={ref}
               w="max-content"
               maxW="max-content"
-              gap="0.5rem"
               gridAutoFlow="column"
               h="fit-content"
             >

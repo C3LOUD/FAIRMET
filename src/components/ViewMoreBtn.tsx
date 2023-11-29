@@ -1,4 +1,4 @@
-import { Button } from "@chakra-ui/react";
+import { Button, Divider, Text } from "@chakra-ui/react";
 import React from "react";
 
 type Props = {
@@ -8,15 +8,40 @@ type Props = {
 const ViewMoreBtn = ({ onClick }: Props) => {
   return (
     <Button
-      variant="outline"
+      w="12rem"
+      variant="link"
       type="button"
       onClick={onClick}
       position="absolute"
       bottom="0"
-      translateY="120%"
+      translateY="140%"
       transform="auto"
+      fontWeight={400}
+      textColor="secondary"
+      fontSize={20}
+      borderBottom="solid 1px"
+      rounded="none"
+      _hover={{
+        borderBottomColor: "transparent",
+      }}
+      role="group"
     >
-      {"View More"}
+      <Text position="relative">
+        {"View More"}
+        <Divider
+          as="span"
+          position="absolute"
+          bottom="0"
+          transform="auto"
+          translateY="0.4rem"
+          borderColor="secondary"
+          left="0"
+          transition="all 0.1s"
+          _groupHover={{
+            borderColor: "transparent",
+          }}
+        />
+      </Text>
     </Button>
   );
 };

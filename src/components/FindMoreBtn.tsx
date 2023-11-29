@@ -10,28 +10,21 @@ const FindMoreBtn: React.FC<Props> = ({ to }) => {
   return (
     <Button
       variant="link"
-      position="absolute"
-      bottom="0"
-      translateY="100%"
-      right="1rem"
-      transform="auto"
-      borderBottom="solid 2px"
       rounded="none"
-      pl="10rem"
-      _hover={{ textColor: "gray.600" }}
+      display="flex"
+      gap="0.5rem"
+      fontSize={18}
+      textColor="secondary"
+      fontWeight={600}
+      alignItems="center"
+      opacity="100%"
+      _hover={{ opacity: "50%" }}
     >
-      <Box position="relative">
-        <Link to={to}>{"Find More \uFF08Seek your air\uFF09"}</Link>
-        <Box
-          position="absolute"
-          right="0"
-          bottom="0"
-          transform="auto"
-          translateY="55%"
-          translateX="45%"
-        >
-          <FaChevronRight />
-        </Box>
+      <Box borderBottom="solid 2px" px="1rem" fontStyle="italic">
+        <Link to={to}>{"Seek more to find your air"}</Link>
+      </Box>
+      <Box fontSize={22}>
+        <FaChevronRight />
       </Box>
     </Button>
   );
