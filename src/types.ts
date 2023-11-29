@@ -41,3 +41,11 @@ export type TBook = {
 };
 
 export type TagKey = keyof TBook["tags"];
+
+export enum BookTag {
+  ALL = "ALL",
+  PICK = "PICK",
+  WEAR = "WEAR",
+  STYLE = "STYLE",
+  OTHER = "OTHER",
+}

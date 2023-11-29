@@ -1,18 +1,29 @@
 import { Box, Container, Heading } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import BookMainSection from "../components/BookMainSection";
 import BookCarousel from "../components/BookCarousel";
 import { BookCardLayout } from "../components/BookCard";
 import BrandCarousel from "../components/BrandCarousel";
 import BookFooterSection from "../components/BookFooterSection";
 import BookBodySection from "../components/BookBodySection";
+import { ScrollRestoration, useLocation } from "react-router-dom";
+import { BookTag } from "../types";
 
 const Book = () => {
+  const [active, setActive] = useState<BookTag>(BookTag.ALL);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname !== "/book") return;
+    setActive(location.hash.slice(1) as BookTag);
+  }, [location]);
+
   return (
     <Container px="0" maxW="100%" w="100%" mb="8rem">
+      <ScrollRestoration />
       <Box as="section" id="book">
         <Heading mb="1rem">{"Book"}</Heading>
-        <BookMainSection />
+        <BookMainSection active={active} />
       </Box>
       <Box h="5rem" />
       <BookCarousel type={BookCardLayout.LandscapeLeft} />

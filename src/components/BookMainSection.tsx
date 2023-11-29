@@ -1,19 +1,24 @@
 import { Box, Center, Grid, Text } from "@chakra-ui/react";
 import { faker } from "@faker-js/faker";
 import { useEffect, useState } from "react";
-import { TBook } from "../types";
+import { BookTag, TBook } from "../types";
 import { getBooks } from "../util/getBooks";
 import BookFilter from "./BookFilter";
 import BooksGridCard from "./BooksGridCard";
+import { useNavigate } from "react-router-dom";
 
 const row = 3;
 const column = 6;
 const gridLayout = [4, 2, 3, 3, 2, 2, 2];
 const limit = gridLayout.length;
 
-const BookMainSection = () => {
+type Props = {
+  active: BookTag;
+};
+
+const BookMainSection: React.FC<Props> = ({ active }) => {
   const [books, setBooks] = useState<TBook[]>([]);
-  const [active, setActive] = useState<string>("ALL");
+  const navigate = useNavigate();
 
   useEffect(() => {
     getBooks({ limit, category: active }).then((res) => {
@@ -23,7 +28,12 @@ const BookMainSection = () => {
 
   return (
     <Box>
-      <BookFilter active={active} setActive={setActive} />
+      <BookFilter
+        active={active}
+        clickHandler={(filter) => {
+          navigate(`/book#${filter}`);
+        }}
+      />
       <Box h="3rem" />
       <Center
         flexDirection="column"

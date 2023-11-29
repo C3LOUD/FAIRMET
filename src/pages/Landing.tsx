@@ -8,10 +8,12 @@ import BrandHeader from "../components/BrandHeader";
 import DictionaryHeader from "../components/DictionaryHeader";
 import HeroCarousel from "../components/HeroCarousel";
 import ReferenceSearch, { PaginationType } from "../components/ReferenceSearch";
+import ScrollToHashElement from "../components/ScrollToHashElement";
 
 const Landing = () => {
   return (
     <Container px="0" maxW="100%">
+      <ScrollToHashElement />
       <Box as="section" id="hero" w="100%" mb="5rem">
         <HeroCarousel />
       </Box>

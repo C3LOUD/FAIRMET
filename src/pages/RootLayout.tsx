@@ -2,7 +2,6 @@ import { Box, Container, Flex, HStack, Text } from "@chakra-ui/react";
 import { RiCopyrightLine } from "react-icons/ri";
 import { Outlet } from "react-router-dom";
 import MobileFooter from "../components/MobileFooter";
-import ScrollToHashElement from "../components/ScrollToHashElement";
 import SideBar from "./SideBar";
 
 const RootLayout = () => {
@@ -15,7 +14,6 @@ const RootLayout = () => {
         maxW={{ base: "48rem", md: "64rem", lg: "90rem" }}
         bgColor="white"
       >
-        <ScrollToHashElement />
         <Flex w="100%" justifyContent="center" gap={2}>
           <Box w="20%" display={{ base: "none", md: "block" }}>
             <SideBar />

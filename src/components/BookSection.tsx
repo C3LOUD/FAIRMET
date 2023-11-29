@@ -1,6 +1,6 @@
 import { Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { TBook } from "../types";
+import { BookTag, TBook } from "../types";
 import { getBooks } from "../util/getBooks";
 import BookFilter from "./BookFilter";
 import BookList from "./BookList";
@@ -15,7 +15,7 @@ const initLimit = 4;
 const BookSection = () => {
   const [books, setBooks] = useState<TBook[]>([]);
   const [limit, setLimit] = useState<number>(initLimit);
-  const [active, setActive] = useState<string>("ALL");
+  const [active, setActive] = useState<BookTag>(BookTag.ALL);
 
   useEffect(() => {
     getBooks({ limit, category: active }).then((res) => {
@@ -37,8 +37,8 @@ const BookSection = () => {
       </Text>
       <BookFilter
         active={active}
-        setActive={setActive}
-        resetState={() => {
+        clickHandler={(filter: BookTag) => {
+          setActive(filter);
           setLimit(initLimit);
         }}
       />

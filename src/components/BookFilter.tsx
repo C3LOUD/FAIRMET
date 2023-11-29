@@ -1,29 +1,31 @@
 import { Button, HStack } from "@chakra-ui/react";
 import React from "react";
+import { BookTag } from "../types";
 
-const bookFilter = ["ALL", "PICK", "WEAR", "STYLE", "OTHER"];
+const bookFilter: BookTag[] = [
+  BookTag.ALL,
+  BookTag.PICK,
+  BookTag.WEAR,
+  BookTag.STYLE,
+  BookTag.OTHER,
+];
 
 type Props = {
-  resetState?: () => void;
-  active: string;
-  setActive: React.Dispatch<React.SetStateAction<string>>;
+  active: BookTag;
+  clickHandler: (filter: BookTag) => void;
 };
 
-const BookFilter: React.FC<Props> = ({ resetState, active, setActive }) => {
+const BookFilter: React.FC<Props> = ({ active, clickHandler }) => {
   return (
-    <HStack
-      pt="1rem"
-      display="flex"
-      borderBottom="1px"
-      borderBottomStyle="solid"
-      borderBottomColor="shade.500"
-      // bgColor="tint.500"
-    >
+    <HStack pt="1rem" display="flex" gap="1rem">
       {bookFilter.map((filter, i) => (
         <Button
+          rounded="none"
+          borderBottom="1px"
+          borderBottomStyle="solid"
+          borderBottomColor="shade.500"
           fontSize={active === filter ? 28 : 20}
           _hover={{
-            border: "none",
             fontSize: active === filter ? 28 : 24,
           }}
           transition="all 0.2s ease-in-out"
@@ -36,8 +38,7 @@ const BookFilter: React.FC<Props> = ({ resetState, active, setActive }) => {
           fontStyle="italic"
           onClick={(e) => {
             e.preventDefault();
-            setActive(filter);
-            resetState?.();
+            clickHandler(filter);
           }}
         >
           {filter}
