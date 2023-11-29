@@ -159,6 +159,8 @@ const ReferenceSearch: React.FC<Props> = ({ type, initLimit }) => {
         setFilter={setFilter}
       />
 
+      <Box h="1rem" />
+
       {filter.length !== 0 && (
         <HStack mb="1rem">
           {filter.map((el, i) => (
