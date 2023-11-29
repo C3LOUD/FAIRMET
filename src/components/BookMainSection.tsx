@@ -35,20 +35,32 @@ const BookMainSection: React.FC<Props> = ({ active }) => {
         }}
       />
       <Box h="3rem" />
-      <Center
-        flexDirection="column"
-        bgColor="secondary"
-        mx="3rem"
-        textColor="primary"
-        py="1rem"
-        px="4rem"
-        h="16rem"
-        gap="1rem"
-      >
-        <Text fontStyle="italic">{active}</Text>
-        <Text textAlign="center">{faker.lorem.paragraph()}</Text>
-        <Text textAlign="center">{faker.lorem.paragraph()}</Text>
-      </Center>
+      <Box bgImage={faker.image.url()} position="relative" h="16rem" mx="3rem">
+        <Center
+          textColor="primary"
+          w="100%"
+          h="100%"
+          py="1rem"
+          px="4rem"
+          gap="1rem"
+          fontWeight={700}
+          flexDirection="column"
+          position="absolute"
+          top="0"
+          left="0"
+          bgColor="shade.alpha.600"
+        >
+          <Text fontStyle="italic" opacity="100%">
+            {active}
+          </Text>
+          <Text opacity="100%" textAlign="center">
+            {faker.lorem.paragraph()}
+          </Text>
+          <Text opacity="100%" textAlign="center">
+            {faker.lorem.paragraph()}
+          </Text>
+        </Center>
+      </Box>
       <Box h="4rem" />
       <Text
         fontStyle="italic"

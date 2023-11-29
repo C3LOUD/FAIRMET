@@ -21,7 +21,8 @@ const BookFilter: React.FC<Props> = ({ active, clickHandler }) => {
       {bookFilter.map((filter, i) => (
         <Button
           rounded="none"
-          borderBottom="1px"
+          textColor={active === filter ? "secondary" : "shade.500"}
+          borderBottom={active === filter ? "2px" : "1px"}
           borderBottomStyle="solid"
           borderBottomColor="shade.500"
           fontSize={active === filter ? 28 : 20}

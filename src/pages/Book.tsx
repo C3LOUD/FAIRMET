@@ -8,6 +8,7 @@ import BookFooterSection from "../components/BookFooterSection";
 import BookBodySection from "../components/BookBodySection";
 import { ScrollRestoration, useLocation } from "react-router-dom";
 import { BookTag } from "../types";
+import BookHeader from "../components/BookHeader";
 
 const Book = () => {
   const [active, setActive] = useState<BookTag>(BookTag.ALL);
@@ -22,7 +23,7 @@ const Book = () => {
     <Container px="0" maxW="100%" w="100%" mb="8rem">
       <ScrollRestoration />
       <Box as="section" id="book">
-        <Heading mb="1rem">{"Book"}</Heading>
+        <BookHeader />
         <BookMainSection active={active} />
       </Box>
       <Box h="5rem" />
