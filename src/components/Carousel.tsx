@@ -13,12 +13,14 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 type Props = {
   isReady: boolean;
   showProgressBar?: boolean;
+  noGap?: boolean;
 };
 
 const Carousel: React.FC<PropsWithChildren<Props>> = ({
   isReady,
   children,
   showProgressBar,
+  noGap,
 }) => {
   const [showLeftBtn, setShowLeftBtn] = useState<boolean>(false);
   const [showRightBtn, setShowRightBtn] = useState<boolean>(true);
@@ -238,6 +240,7 @@ const Carousel: React.FC<PropsWithChildren<Props>> = ({
               maxW="max-content"
               gridAutoFlow="column"
               h="fit-content"
+              gap={noGap ? "0" : "0.5rem"}
             >
               {children}
             </Grid>

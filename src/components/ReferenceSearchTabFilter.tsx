@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Divider,
   Flex,
   HStack,
   Tab,
@@ -10,9 +11,9 @@ import {
   Tabs,
   Text,
 } from "@chakra-ui/react";
-import React, { useEffect, useRef } from "react";
-import { Filter } from "../types";
+import React, { useRef, useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
+import { Filter } from "../types";
 
 type Props = {
   items: Filter[];
@@ -21,17 +22,64 @@ type Props = {
 };
 
 const ReferenceSearchTabFilter = ({ items, filter, setFilter }: Props) => {
+  const [showLeftBtn, setShowLeftBtn] = useState<boolean>(false);
+  const [showRightBtn, setShowRightBtn] = useState<boolean>(true);
   const containerRef = useRef<HTMLDivElement>(null);
   const childRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    console.log(childRef.current?.offsetWidth);
-    console.log(containerRef.current?.offsetWidth);
-  }, [childRef.current?.offsetWidth, containerRef.current?.offsetWidth]);
+  const getOffset = () => {
+    return childRef.current?.offsetWidth! - containerRef.current?.offsetWidth!;
+  };
+
+  const leftHandler = (e: React.MouseEvent) => {
+    e.preventDefault();
+    containerRef.current?.scrollTo(0, 0);
+  };
+
+  const rightHandler = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const offset = getOffset();
+    containerRef.current?.scrollTo(offset, 0);
+  };
+
+  const onScrollHandler = () => {
+    const offset = getOffset();
+    if (
+      containerRef.current?.getClientRects()[0].x! -
+        childRef.current?.getClientRects()[0].x! ===
+        offset &&
+      showRightBtn
+    ) {
+      setShowRightBtn(false);
+    } else if (
+      containerRef.current?.getClientRects()[0].x! -
+        childRef.current?.getClientRects()[0].x! !==
+        offset &&
+      !showRightBtn
+    ) {
+      setShowRightBtn(true);
+    }
+
+    if (
+      containerRef.current?.getClientRects()[0].x! -
+        childRef.current?.getClientRects()[0].x! ===
+        0 &&
+      showLeftBtn
+    ) {
+      setShowLeftBtn(false);
+    } else if (
+      containerRef.current?.getClientRects()[0].x! -
+        childRef.current?.getClientRects()[0].x! !==
+        0 &&
+      !showLeftBtn
+    ) {
+      setShowLeftBtn(true);
+    }
+  };
 
   return (
     <Tabs>
-      <Box overflow="hidden" bgColor="tint.500" ref={containerRef} w="100%">
+      <Box overflow="hidden" bgColor="tint.500" w="100%">
         <Box position="relative" w="100%">
           <HStack
             h="999rem"
@@ -51,23 +99,36 @@ const ReferenceSearchTabFilter = ({ items, filter, setFilter }: Props) => {
             >
               {"Specific Items"}
             </Text>
-            <Button variant="unstyle" bgColor="" p="0" m="0">
-              <FaChevronLeft />
-            </Button>
+            {showLeftBtn && (
+              <Button
+                variant="unstyle"
+                rounded="none"
+                p="0"
+                onClick={leftHandler}
+              >
+                <FaChevronLeft />
+              </Button>
+            )}
           </HStack>
-          <Button
-            rounded="0"
-            py="99rem"
-            variant="unstyle"
-            bgColor="tint.500"
-            p="0"
-            position="absolute"
-            right="0"
-            top="0"
-          >
-            <FaChevronRight />
-          </Button>
+          {showRightBtn && (
+            <Button
+              rounded="none"
+              variant="unstyle"
+              bgColor="tint.500"
+              py="0"
+              px="0"
+              position="absolute"
+              right="0"
+              top="0"
+              onClick={rightHandler}
+            >
+              <FaChevronRight />
+            </Button>
+          )}
           <TabList
+            border="none"
+            ref={containerRef}
+            onScroll={onScrollHandler}
             overflowX="auto"
             overflowY="hidden"
             css={{
@@ -76,7 +137,7 @@ const ReferenceSearchTabFilter = ({ items, filter, setFilter }: Props) => {
               },
             }}
           >
-            <Flex ref={childRef} pl="9rem">
+            <Flex ref={childRef} pl="11rem" pr="1rem">
               {items.map((item, i) => (
                 <Tab
                   key={i}
@@ -95,9 +156,19 @@ const ReferenceSearchTabFilter = ({ items, filter, setFilter }: Props) => {
         </Box>
       </Box>
 
-      <TabPanels bgColor="tint.500">
+      <TabPanels bgColor="tint.500" position="relative">
         {items.map((item, i) => (
           <TabPanel key={i} display="flex" gap="1rem" flexWrap="wrap">
+            <Divider
+              h="1px"
+              bgColor="shade.500"
+              w="97%"
+              position="absolute"
+              top="0"
+              left="50%"
+              transform="auto"
+              translateX="-50%"
+            />
             {item.options.map((option, i) => {
               const isActive = filter.includes(option);
               return (

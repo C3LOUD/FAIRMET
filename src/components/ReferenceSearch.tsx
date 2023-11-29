@@ -163,6 +163,8 @@ const ReferenceSearch: React.FC<Props> = ({ type, initLimit }) => {
 				setFilter={setFilter}
 			/>
 
+			<Box h="1rem" />
+
 			{filter.length !== 0 && (
 				<HStack mb="1rem">
 					{filter.map((el, i) => (
@@ -196,7 +198,8 @@ const ReferenceSearch: React.FC<Props> = ({ type, initLimit }) => {
 					</Button>
 				</HStack>
 			)}
-			<Flex alignItems="center" direction="column" pt="2">
+			<Box h="1rem" />
+			<Flex alignItems="center" direction="column">
 				{brands.length !== 0 && (
 					<DictionaryList rows={rows} limit={limit} brands={brands} />
 				)}
