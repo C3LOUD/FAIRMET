@@ -6,20 +6,20 @@ import {
   Box,
   Button,
   Flex,
-  Grid,
-  GridItem,
   HStack,
   Select,
   Tag,
   Text,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import { Brand, Filter } from "../types";
+import { useRouteLoaderData } from "react-router-dom";
+import { Brand, Filter, TagKey } from "../types";
 import { getBrands } from "../util/getBrands";
-import { getFilters } from "../util/getFilters";
 import DictionaryList from "./DictionaryList";
 import FindMoreBtn from "./FindMoreBtn";
 import Pagination from "./Pagination";
+import ReferenceSearchBox from "./ReferenceSearchBox";
+import ReferenceSearchTabFilter from "./ReferenceSearchTabFilter";
 import SeekMoreBtn from "./SeekMoreBtn";
 
 const rows = 3;
@@ -34,17 +34,26 @@ type Props = {
   initLimit: number;
 };
 
+const upperTags: TagKey[] = [
+  "Style, Occasion & Dressing Type",
+  "Function & Activity",
+  "Notable Category & Item",
+  "Country & Region",
+  "Item & Category",
+];
+const lowerTags: TagKey[] = ["Field", "Price", "Price", "Sort"];
+
 const ReferenceSearch: React.FC<Props> = ({ type, initLimit }) => {
-  const [menuItem, setMenuItem] = useState<Filter[]>([]);
   const [filter, setFilter] = useState<string[]>([]);
   const [brands, setBrands] = useState<Brand[]>([]);
   const [limit, setLimit] = useState<number>(initLimit);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [total, setTotal] = useState<number>(1);
 
-  useEffect(() => {
-    getFilters().then((res) => setMenuItem(res));
-  }, []);
+  const data = useRouteLoaderData("filters") as {
+    filters: Filter[];
+    items: Filter[];
+  };
 
   useEffect(() => {
     getBrands({ ...(filter.length !== 0 && { filter }) }).then((res) =>
@@ -118,67 +127,38 @@ const ReferenceSearch: React.FC<Props> = ({ type, initLimit }) => {
           </AccordionButton>
 
           <AccordionPanel pb={4} bgColor="tint.100">
-            <Grid templateColumns="repeat(4, 1fr)">
-              {menuItem.length &&
-                menuItem.map((menu) => {
-                  return (
-                    <GridItem key={menu.id} textAlign="center">
-                      <Box>
-                        <Text>{menu.type}</Text>
-                        <Grid templateColumns="repeat(2, 1fr)" gap="0.5rem">
-                          {menu.options.map((option: string, i: number) => {
-                            const isActive = filter.includes(option);
-                            return (
-                              <GridItem key={i}>
-                                <Button
-                                  boxShadow={
-                                    isActive
-                                      ? "1px 1px 0 2px var(--chakra-colors-shade-500) inset"
-                                      : "1px 1px 0 1px var(--chakra-colors-shade-500)"
-                                  }
-                                  bgColor={isActive ? "shade.200" : "primary"}
-                                  _hover={{
-                                    background: isActive
-                                      ? "shade.300"
-                                      : "shade.100",
-                                  }}
-                                  _active={{
-                                    boxShadow:
-                                      "1px 1px 1px 1px var(--chakra-colors-shade-500) inset",
-                                    background: isActive
-                                      ? "shade.400"
-                                      : "shade.200",
-                                  }}
-                                  rounded="none"
-                                  p="0"
-                                  w="5rem"
-                                  h="fit-content"
-                                  wordBreak="break-word"
-                                  border="1px"
-                                  whiteSpace="break-spaces"
-                                  fontSize="sm"
-                                  onClick={(e: React.MouseEvent) => {
-                                    e.preventDefault();
-                                    const newFilter = isActive
-                                      ? filter.filter((el) => el !== option)
-                                      : [...filter, option];
-                                    setFilter(newFilter);
-                                  }}
-                                >
-                                  {option}
-                                </Button>
-                              </GridItem>
-                            );
-                          })}
-                        </Grid>
-                      </Box>
-                    </GridItem>
-                  );
-                })}
-            </Grid>
+            <Flex>
+              {upperTags.map((tag, i) => (
+                <ReferenceSearchBox
+                  key={i}
+                  data={data.filters}
+                  tag={tag}
+                  filter={filter}
+                  setFilter={setFilter}
+                />
+              ))}
+            </Flex>
+            <Flex>
+              {lowerTags.map((tag, i) => (
+                <ReferenceSearchBox
+                  key={i}
+                  data={data.filters}
+                  tag={tag}
+                  filter={filter}
+                  setFilter={setFilter}
+                />
+              ))}
+            </Flex>
           </AccordionPanel>
         </AccordionItem>
       </Accordion>
+
+      <ReferenceSearchTabFilter
+        filter={filter}
+        items={data.items}
+        setFilter={setFilter}
+      />
+
       {filter.length !== 0 && (
         <HStack mb="1rem">
           {filter.map((el, i) => (

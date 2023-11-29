@@ -6,7 +6,7 @@ export type Brand = {
     "Style, Occasion & Dressing Type": string[];
     Field: string[];
     "Item & Category": string[];
-    "Specific Item": string[];
+    "Notable Category & Item": string[];
     "Function & Activity": string[];
     "Country & Region": string[];
     Price: string[];
@@ -29,7 +29,7 @@ export type TBook = {
     "Style, Occasion & Dressing Type": string[];
     Field: string[];
     "Item & Category": string[];
-    "Specific Item": string[];
+    "Notable Category & Item": string[];
     "Function & Activity": string[];
     "Country & Region": string[];
     Price: string[];

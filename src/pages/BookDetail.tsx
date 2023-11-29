@@ -24,7 +24,7 @@ const bookTags: TagKey[] = [
   "Country & Region",
   "Field",
   "Function & Activity",
-  "Specific Item",
+  "Notable Category & Item",
   "Item & Category",
 ];
 
