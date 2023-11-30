@@ -1,28 +1,39 @@
-import { Box, Button, HStack } from "@chakra-ui/react";
+import { Box, Button, Center, HStack, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { TBook } from "../types";
 import { getBooks } from "../util/getBooks";
 import { getFilters } from "../util/getFilters";
 import BookList from "./BookList";
-import FindMoreBtn from "./FindMoreBtn";
+import Pagination from "./Pagination";
 import ThinContainer from "./ThinContainer";
-import ViewMoreBtn from "./ViewMoreBtn";
 
-const totalLimit = 7;
-const moreCount = 3;
 const initLimit = 4;
 
 const BookBodySection = () => {
   const [books, setBooks] = useState<TBook[]>([]);
   const [limit, setLimit] = useState<number>(initLimit);
-  const [active, setActive] = useState<string>();
+  const [active, setActive] = useState<string | undefined>(undefined);
   const [filterArr, setFilterArr] = useState<string[]>([]);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [totalPage, setTotalPage] = useState<number>(1);
+
+  const location = useLocation();
 
   useEffect(() => {
-    getBooks({ limit, tag: active }).then((res) => {
-      setBooks(res);
-    });
-  }, [limit, active]);
+    setCurrentPage(1);
+    setActive(undefined);
+  }, [location]);
+
+  useEffect(() => {
+    getBooks({ limit, tag: active, skip: (currentPage - 1) * limit }).then(
+      (res) => setBooks(res)
+    );
+
+    getBooks({ tag: active }).then((res) =>
+      setTotalPage(Math.ceil(res.length / limit))
+    );
+  }, [limit, active, currentPage]);
 
   useEffect(() => {
     getFilters().then((res) =>
@@ -68,18 +79,22 @@ const BookBodySection = () => {
         </HStack>
       </Box>
       <ThinContainer>
-        <BookList books={books}>
-          {limit < totalLimit && books.length <= limit ? (
-            <ViewMoreBtn
-              onClick={(e) => {
-                e.preventDefault();
-                setLimit((prev) => prev + moreCount);
-              }}
+        {books.length === 0 ? (
+          <Center minH="5rem">
+            <Text lineHeight="5rem">
+              {"Nothing found, try another category"}
+            </Text>
+          </Center>
+        ) : (
+          <BookList books={books}>
+            <Pagination
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              total={totalPage}
             />
-          ) : (
-            <FindMoreBtn to={`/book#${active}`} />
-          )}
-        </BookList>
+          </BookList>
+        )}
+        <Box h="2rem" />
       </ThinContainer>
     </>
   );

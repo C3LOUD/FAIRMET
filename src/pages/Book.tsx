@@ -1,14 +1,13 @@
 import { Box, Container, Heading } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
-import BookMainSection from "../components/BookMainSection";
-import BookCarousel from "../components/BookCarousel";
-import { BookCardLayout } from "../components/BookCard";
-import BrandCarousel from "../components/BrandCarousel";
-import BookFooterSection from "../components/BookFooterSection";
-import BookBodySection from "../components/BookBodySection";
+import { useEffect, useState } from "react";
 import { ScrollRestoration, useLocation } from "react-router-dom";
-import { BookTag } from "../types";
+import BookBodySection from "../components/BookBodySection";
+import { BookCardLayout } from "../components/BookCard";
+import BookCarousel from "../components/BookCarousel";
 import BookHeader from "../components/BookHeader";
+import BookMainSection from "../components/BookMainSection";
+import BrandCarousel from "../components/BrandCarousel";
+import { BookTag } from "../types";
 
 const Book = () => {
   const [active, setActive] = useState<BookTag>(BookTag.ALL);
@@ -37,7 +36,7 @@ const Book = () => {
         <BrandCarousel />
       </Box>
       <Box h="3rem" />
-      <BookFooterSection />
+      {/* <BookFooterSection /> */}
     </Container>
   );
 };
