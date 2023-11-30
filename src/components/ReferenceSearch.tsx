@@ -10,18 +10,20 @@ import {
 	Select,
 	Tag,
 	Text,
+	Divider,
 	useMediaQuery,
-} from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
-import { useRouteLoaderData } from 'react-router-dom';
-import { Brand, Filter, TagKey } from '../types';
-import { getBrands } from '../util/getBrands';
-import DictionaryList from './DictionaryList';
-import FindMoreBtn from './FindMoreBtn';
-import Pagination from './Pagination';
-import ReferenceSearchBox from './ReferenceSearchBox';
-import ReferenceSearchTabFilter from './ReferenceSearchTabFilter';
-import SeekMoreBtn from './SeekMoreBtn';
+} from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
+import { useRouteLoaderData } from "react-router-dom";
+import { Brand, Filter, TagKey } from "../types";
+import { getBrands } from "../util/getBrands";
+import DictionaryList from "./DictionaryList";
+import FindMoreBtn from "./FindMoreBtn";
+import Pagination from "./Pagination";
+import ReferenceSearchBox from "./ReferenceSearchBox";
+import ReferenceSearchTabFilter from "./ReferenceSearchTabFilter";
+import SeekMoreBtn from "./SeekMoreBtn";
+import { IoIosClose } from "react-icons/io";
 
 let rows = 3;
 
@@ -36,13 +38,13 @@ type Props = {
 };
 
 const upperTags: TagKey[] = [
-	'Style, Occasion & Dressing Type',
-	'Function & Activity',
-	'Notable Category & Item',
-	'Country & Region',
-	'Item & Category',
+	"Style, Occasion",
+	"Function & Activity",
+	"Item & Category",
+	"Country & Region",
+	"Notable Category & Item",
 ];
-const lowerTags: TagKey[] = ['Field', 'Price', 'Price', 'Sort'];
+const lowerTags: TagKey[] = ["Field", "Price", "Sort", "Gender"];
 
 const ReferenceSearch: React.FC<Props> = ({ type, initLimit }) => {
 	const [filter, setFilter] = useState<string[]>([]);
@@ -50,10 +52,10 @@ const ReferenceSearch: React.FC<Props> = ({ type, initLimit }) => {
 	const [limit, setLimit] = useState<number>(initLimit);
 	const [currentPage, setCurrentPage] = useState<number>(1);
 	const [total, setTotal] = useState<number>(1);
-	const [isLargerThan768] = useMediaQuery('(min-width: 769px)');
+	const [isLargerThan768] = useMediaQuery("(min-width: 769px)");
 	rows = isLargerThan768 ? 3 : 2;
 
-	const data = useRouteLoaderData('filters') as {
+	const data = useRouteLoaderData("filters") as {
 		filters: Filter[];
 		items: Filter[];
 	};
@@ -79,7 +81,7 @@ const ReferenceSearch: React.FC<Props> = ({ type, initLimit }) => {
 			<HStack justifyContent="end">
 				{type === PaginationType.normal && (
 					<>
-						<Text>{'Limit'}</Text>
+						<Text>{"Limit"}</Text>
 						<Select
 							w="fit-content"
 							h="fit-content"
@@ -101,18 +103,21 @@ const ReferenceSearch: React.FC<Props> = ({ type, initLimit }) => {
 						</Select>
 					</>
 				)}
-				<Text fontSize={{ base: 14, md: 16 }}>{'Sort by\uFF1A'}</Text>
+				<Text fontSize={{ base: 14, md: 16 }}>{"Sort by\uFF1A"}</Text>
 				<Select
 					fontSize={{ base: 14, md: 16 }}
 					w="fit-content"
 					h="fit-content"
+					fontStyle="italic"
+					fontWeight="semibold"
 					border="none"
-					_focus={{ ring: 'none' }}
+					_focus={{ ring: "none" }}
 				>
-					<option value="RANDOM">{'RANDOM'}</option>
-					<option value="DATE">{'DATE'}</option>
-					<option value="CHAR">{'A-Z \uFF08CAPITAL\uFF09'}</option>
-					<option value="RANDOM">{'RANDOM'}</option>
+					<option value="RANDOM">{"RANDOM"}</option>
+					<option value="DATE">{"DATE"}</option>
+					<option value="CHAR">{"A-Z \uFF08CAPITAL\uFF09"}</option>
+					<option value="Default/Featured">{"Default/Featured"}</option>
+					<option value="Spotlight/Hightlight">{"Spotlight/Hightlight"}</option>
 				</Select>
 			</HStack>
 			<Accordion allowToggle mb="1rem">
@@ -126,7 +131,7 @@ const ReferenceSearch: React.FC<Props> = ({ type, initLimit }) => {
 							px="1rem"
 							textColor="shade.500"
 						>
-							{'Filter and Order by'}
+							{"Filter and Order by"}
 						</Box>
 					</AccordionButton>
 
@@ -142,6 +147,7 @@ const ReferenceSearch: React.FC<Props> = ({ type, initLimit }) => {
 								/>
 							))}
 						</Flex>
+						<Divider my="2" borderColor="secondary" />
 						<Flex>
 							{lowerTags.map((tag, i) => (
 								<ReferenceSearchBox
@@ -166,7 +172,7 @@ const ReferenceSearch: React.FC<Props> = ({ type, initLimit }) => {
 			<Box h="1rem" />
 
 			{filter.length !== 0 && (
-				<HStack mb="1rem">
+				<HStack mb="1rem" flexWrap="wrap">
 					{filter.map((el, i) => (
 						<Tag
 							bgColor="white"
@@ -176,8 +182,24 @@ const ReferenceSearch: React.FC<Props> = ({ type, initLimit }) => {
 							textColor="shade.500"
 							fontWeight="700"
 							fontStyle="italic"
+							whiteSpace="nowrap"
+							pos="relative"
+							role="group"
 						>
-							{el}
+							{el}&nbsp;
+							<Box
+								cursor="pointer"
+								display="none"
+								_groupHover={{
+									display: "block",
+								}}
+								onClick={() => {
+									const newFilter = filter.filter((v) => v !== el);
+									setFilter(newFilter);
+								}}
+							>
+								<IoIosClose />
+							</Box>
 						</Tag>
 					))}
 					<Button
@@ -186,15 +208,15 @@ const ReferenceSearch: React.FC<Props> = ({ type, initLimit }) => {
 						variant="link"
 						fontStyle="italic"
 						_hover={{
-							border: 'none',
-							textColor: 'shade',
+							border: "none",
+							textColor: "shade",
 						}}
 						onClick={(e: React.MouseEvent) => {
 							e.preventDefault();
 							setFilter([]);
 						}}
 					>
-						{'Clear All'}
+						{"Clear All"}
 					</Button>
 				</HStack>
 			)}

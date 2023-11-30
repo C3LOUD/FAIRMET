@@ -24,7 +24,7 @@ import { TBook, TagKey } from "../types";
 import { getBook } from "../util/getBook";
 
 const bookTags: TagKey[] = [
-	"Style, Occasion & Dressing Type",
+	"Style, Occasion",
 	"Gender",
 	"Country & Region",
 	"Field",
