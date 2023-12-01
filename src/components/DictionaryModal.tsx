@@ -57,7 +57,7 @@ const DictionaryModal: React.FC<Props> = ({
 			<ModalContent
 				my="auto"
 				rounded="none"
-				h={{ base: "95vh", md: "80vh" }}
+				h={{ base: "85vh", md: "80vh" }}
 				w={{ base: "85vw", md: "80vw" }}
 				maxW="80rem"
 				px="2rem"
@@ -162,20 +162,30 @@ const DictionaryModal: React.FC<Props> = ({
 								</Box>
 							</Flex>
 						</Flex>
-						<Flex display={{ base: "flex", md: "none" }}>
-							<Box flex={`1 1 ${imageGridMinH / 4}rem`} minH="0" minW="0">
-								<Image
-									src={faker.image.url()}
-									w="100%"
-									h="100%"
-									objectFit="cover"
-									objectPosition="center"
-								/>
-							</Box>
+						<Flex display={{ base: "flex", md: "none" }} pos="relative">
+							<Image
+								src={faker.image.url()}
+								w="100%"
+								h="100%"
+								objectFit="cover"
+								objectPosition="center"
+							/>
+							<Image
+								objectFit="cover"
+								src={`/image/Brand/${brand.title}/logo.png`}
+								alt={brand.title}
+								w="40%"
+								border="2px solid white"
+								pos="absolute"
+								zIndex={20}
+								right="5%"
+								bottom="-10%"
+								opacity="0.9"
+							/>
 						</Flex>
 						<Box flex={{ base: "1", md: "3" }}>
-							<ModalHeader>{brand.title}</ModalHeader>
-							<ModalBody>
+							<ModalHeader px={{ base: 1, md: 8 }}>{brand.title}</ModalHeader>
+							<ModalBody px={{ base: 1, md: 8 }}>
 								<Tabs display={{ base: "none", md: "block" }}>
 									<TabList display="flex">
 										<Tab
@@ -262,7 +272,15 @@ const DictionaryModal: React.FC<Props> = ({
 									</TabPanels>
 								</Tabs>
 								<Flex display={{ base: "block", md: "none" }}>
-									<Box>{"Introduction"}</Box>
+									<Box
+										fontStyle="italic"
+										fontWeight="bold"
+										fontSize={18}
+										borderBottom="1px solid black"
+									>
+										{"Introduction"}
+									</Box>
+									<Box h="1rem"></Box>
 									<Flex flexDirection="column">
 										{brand?.content ? (
 											brand.content.split("\n").map((section, i) => (
@@ -283,7 +301,16 @@ const DictionaryModal: React.FC<Props> = ({
 											</Text>
 										)}
 									</Flex>
-									<Box>{"Personality \u0026 Product"}</Box>
+									<Box h="3rem"></Box>
+									<Box
+										fontStyle="italic"
+										fontWeight="bold"
+										fontSize={18}
+										borderBottom="1px solid black"
+									>
+										{"Personality \u0026 Product"}
+									</Box>
+									<Box h="1rem"></Box>
 									<Flex flexDirection="column" gap="2rem">
 										{productTagList.map((title, i) => (
 											<TagList
@@ -293,7 +320,16 @@ const DictionaryModal: React.FC<Props> = ({
 											/>
 										))}
 									</Flex>
-									<Box>{"Other Detail \u0026 Link"}</Box>
+									<Box h="3rem"></Box>
+									<Box
+										fontStyle="italic"
+										fontWeight="bold"
+										fontSize={18}
+										borderBottom="1px solid black"
+									>
+										{"Other Detail \u0026 Link"}
+									</Box>
+									<Box h="1rem"></Box>
 									<Flex flexDirection="column" gap="2rem">
 										{otherTagList.map((title, i) => (
 											<TagList
@@ -303,6 +339,7 @@ const DictionaryModal: React.FC<Props> = ({
 											/>
 										))}
 									</Flex>
+									<Box h="3rem"></Box>
 								</Flex>
 							</ModalBody>
 						</Box>
