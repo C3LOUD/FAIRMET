@@ -10,6 +10,7 @@ type Props = {
 };
 
 const ReferenceSearchBox = ({ data, tag, filter, setFilter }: Props) => {
+	if (tag === "Specific Item") return <></>;
 	return (
 		<VStack flex="1" maxW="100%" w="100%" h="12rem" overflow="hidden" p="2">
 			<Text w="100%" fontWeight="bold">

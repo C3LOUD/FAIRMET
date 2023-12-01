@@ -11,6 +11,7 @@ export type Brand = {
 		"Country & Region": string[];
 		Price: string[];
 		Gender: string[];
+		"Specific Item": string[];
 	};
 	content: string;
 };
@@ -34,6 +35,7 @@ export type TBook = {
 		"Country & Region": string[];
 		Price: string[];
 		Gender: string[];
+		"Specific Item": string[];
 	};
 	title: string;
 	content: string;

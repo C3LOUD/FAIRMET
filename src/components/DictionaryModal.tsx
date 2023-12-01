@@ -57,8 +57,8 @@ const DictionaryModal: React.FC<Props> = ({
 			<ModalContent
 				my="auto"
 				rounded="none"
-				h="90vh"
-				w="90vw"
+				h={{ base: "95vh", md: "80vh" }}
+				w={{ base: "85vw", md: "80vw" }}
 				maxW="80rem"
 				px="2rem"
 				py="1rem"
@@ -107,6 +107,7 @@ const DictionaryModal: React.FC<Props> = ({
 
 				<Box overflow="hidden" h="100%" w="100%">
 					<Flex
+						flexDirection={{ base: "column", md: "row" }}
 						overflowY="auto"
 						h="100%"
 						css={{
@@ -120,6 +121,7 @@ const DictionaryModal: React.FC<Props> = ({
 							direction="column"
 							gap="1rem"
 							minH={`${imageGridMinH}rem`}
+							display={{ base: "none", md: "flex" }}
 						>
 							<Box flex={`2 1 ${imageGridMinH / 2}rem`} minH="0" minW="0">
 								<Image
@@ -160,10 +162,21 @@ const DictionaryModal: React.FC<Props> = ({
 								</Box>
 							</Flex>
 						</Flex>
-						<Box flex="3">
+						<Flex display={{ base: "flex", md: "none" }}>
+							<Box flex={`1 1 ${imageGridMinH / 4}rem`} minH="0" minW="0">
+								<Image
+									src={faker.image.url()}
+									w="100%"
+									h="100%"
+									objectFit="cover"
+									objectPosition="center"
+								/>
+							</Box>
+						</Flex>
+						<Box flex={{ base: "1", md: "3" }}>
 							<ModalHeader>{brand.title}</ModalHeader>
 							<ModalBody>
-								<Tabs>
+								<Tabs display={{ base: "none", md: "block" }}>
 									<TabList display="flex">
 										<Tab
 											flex="1"
@@ -248,6 +261,49 @@ const DictionaryModal: React.FC<Props> = ({
 										</TabPanel>
 									</TabPanels>
 								</Tabs>
+								<Flex display={{ base: "block", md: "none" }}>
+									<Box>{"Introduction"}</Box>
+									<Flex flexDirection="column">
+										{brand?.content ? (
+											brand.content.split("\n").map((section, i) => (
+												<Text key={i} textColor="secondary">
+													{section}
+												</Text>
+											))
+										) : (
+											<Text
+												textAlign="center"
+												fontSize={18}
+												textColor="shade.500"
+												opacity="20%"
+												fontWeight={700}
+												fontStyle="italic"
+											>
+												{"Empty"}
+											</Text>
+										)}
+									</Flex>
+									<Box>{"Personality \u0026 Product"}</Box>
+									<Flex flexDirection="column" gap="2rem">
+										{productTagList.map((title, i) => (
+											<TagList
+												key={i}
+												title={title}
+												value={brand.tags[title]}
+											/>
+										))}
+									</Flex>
+									<Box>{"Other Detail \u0026 Link"}</Box>
+									<Flex flexDirection="column" gap="2rem">
+										{otherTagList.map((title, i) => (
+											<TagList
+												key={i}
+												title={title}
+												value={brand.tags[title]}
+											/>
+										))}
+									</Flex>
+								</Flex>
 							</ModalBody>
 						</Box>
 					</Flex>

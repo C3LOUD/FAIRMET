@@ -21,6 +21,7 @@ import DictionaryList from "./DictionaryList";
 import FindMoreBtn from "./FindMoreBtn";
 import Pagination from "./Pagination";
 import ReferenceSearchBox from "./ReferenceSearchBox";
+import ReferenceSearchBoxMobile from "./ReferenceSearchBoxMobile";
 import ReferenceSearchTabFilter from "./ReferenceSearchTabFilter";
 import SeekMoreBtn from "./SeekMoreBtn";
 import { IoIosClose } from "react-icons/io";
@@ -45,6 +46,18 @@ const upperTags: TagKey[] = [
 	"Notable Category & Item",
 ];
 const lowerTags: TagKey[] = ["Field", "Price", "Sort", "Gender"];
+const mobileTags: TagKey[] = [
+	"Style, Occasion",
+	"Function & Activity",
+	"Item & Category",
+	"Country & Region",
+	"Notable Category & Item",
+	"Field",
+	"Price",
+	"Sort",
+	"Gender",
+	"Specific Item",
+];
 
 const ReferenceSearch: React.FC<Props> = ({ type, initLimit }) => {
 	const [filter, setFilter] = useState<string[]>([]);
@@ -136,7 +149,7 @@ const ReferenceSearch: React.FC<Props> = ({ type, initLimit }) => {
 					</AccordionButton>
 
 					<AccordionPanel pb={4} bgColor="tint.100">
-						<Flex>
+						<Flex display={{ base: "none", md: "flex" }}>
 							{upperTags.map((tag, i) => (
 								<ReferenceSearchBox
 									key={i}
@@ -147,8 +160,12 @@ const ReferenceSearch: React.FC<Props> = ({ type, initLimit }) => {
 								/>
 							))}
 						</Flex>
-						<Divider my="2" borderColor="secondary" />
-						<Flex>
+						<Divider
+							my="2"
+							borderColor="secondary"
+							display={{ base: "none", md: "block" }}
+						/>
+						<Flex display={{ base: "none", md: "flex" }}>
 							{lowerTags.map((tag, i) => (
 								<ReferenceSearchBox
 									key={i}
@@ -158,6 +175,19 @@ const ReferenceSearch: React.FC<Props> = ({ type, initLimit }) => {
 									setFilter={setFilter}
 								/>
 							))}
+						</Flex>
+						<Flex display={{ base: "flex", md: "none" }} flexDirection="column">
+							<Accordion allowToggle mb="1rem">
+								{mobileTags.map((tag, i) => (
+									<ReferenceSearchBoxMobile
+										key={i}
+										data={data.filters}
+										tag={tag}
+										filter={filter}
+										setFilter={setFilter}
+									/>
+								))}
+							</Accordion>
 						</Flex>
 					</AccordionPanel>
 				</AccordionItem>

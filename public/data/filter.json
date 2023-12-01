@@ -178,6 +178,37 @@
         "Unisex",
         "I don't care"
       ]
+    },
+    {
+      "id": "73a78653-32c6-4089-9e96-cab45d6636f9",
+      "type": "Specific Item",
+      "options": [
+        "Asymmtric T-shirt",
+        "Mock-Neck T-shirt",
+        "Floral Shirt",
+        "Paisley Shirt",
+        "Print Shirt",
+        "Silk Shirt",
+        "Voile Shirt",
+        "Formal (Business) Shirt",
+        "Leather Jacket",
+        "Trench Coat",
+        "Puffer Jacket",
+        "Parka",
+        "Blazers 2",
+        "Outerwear 2",
+        "Jeans 1",
+        "Luggage",
+        "Scarf",
+        "Silk Scarf",
+        "Leather Gloves",
+        "White Sneaker",
+        "White high top Sneaker",
+        "Chelsea Boots",
+        "Activewear 2",
+        "Thermal Layer",
+        "Flower & Floral Design"
+      ]
     }
   ]
 }
